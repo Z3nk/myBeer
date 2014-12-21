@@ -1,9 +1,12 @@
 package com.my.Tools;
 
+import java.util.ArrayList;
+
 import com.my.Entity.Bar;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
 
@@ -34,6 +37,7 @@ public class Bar_DAO {
 	     valeurs.put("adress", bar.getAdress());
 	     valeurs.put("beers", bar.getBeers());
 	     valeurs.put("idUpdate", bar.getIdUpdate());
+	     valeurs.put("idServer", bar.getIdServer());
 	     return bd.insert("bar", null, valeurs);
 		
 	}
@@ -45,12 +49,34 @@ public class Bar_DAO {
 	     valeurs.put("adress", bar.getAdress());
 	     valeurs.put("beers", bar.getBeers());
 	     valeurs.put("idUpdate", bar.getIdUpdate());
+	     valeurs.put("idServer", bar.getIdServer());
 	     bd.update("bar", valeurs, "id = "+bar.getId(), null);
          return bar.getId();
 	}
 
 	public void delete(Bar bar) {
 		// TODO Auto-generated method stub
-		
+	}
+	
+	public ArrayList<Bar> getBars() {
+		 ArrayList<Bar> liste = new ArrayList<Bar>();
+	        Cursor curseur = bd.query("bar", null, null, null,  null, null, "name") ;
+	        if (curseur.getCount()==0) 
+	        	return liste;
+	        curseur.moveToFirst();
+	        do {
+	        	Bar b = new Bar();
+	            b.setId(curseur.getInt(0));
+	            b.setName(curseur.getString(1));
+	            b.setPosFromToString(curseur.getString(2));
+	            b.setAdress(curseur.getString(3));
+	            b.setBeers(curseur.getString(4));
+	            b.setIdUpdate(curseur.getInt(5));
+	            b.setIdServer(curseur.getString(6));
+	            liste.add(b);
+	        }
+	        while (curseur.moveToNext());
+	        	curseur.close();
+	        return liste;
 	}
 }

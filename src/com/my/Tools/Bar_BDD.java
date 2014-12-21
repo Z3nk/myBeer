@@ -19,13 +19,14 @@ public class Bar_BDD extends SQLiteOpenHelper {
 				+ "pos Text NOT NULL,"
 				+ "adress TEXT NOT NULL,"
 				+ "beers TEXT NOT NULL,"
-				+ "idUpdate INTEGER);");
+				+ "idUpdate INTEGER,"
+				+ "idServer TEXT NOT NULL);");
 	}
 
 	@Override
 	public void onUpgrade(SQLiteDatabase db, int ancienneVersion,
 			int nouvelleVersion) {
-		db.execSQL("DROP TABLE plante;");
+		db.execSQL("DROP TABLE bar;");
 		onCreate(db);
 	}
 

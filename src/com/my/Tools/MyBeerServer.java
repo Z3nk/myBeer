@@ -7,15 +7,16 @@ import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.List;
 
 import com.my.Entity.*;
 import com.google.android.gms.maps.model.LatLng;
 
 public class MyBeerServer {
 	
-	public static final String BEER_ADRESSE="http://192.168.0.11:3000";
+	public static final String BEER_ADRESSE="http://192.168.1.33:3000";
 	
-	public static void addBar(Bar bar) throws IOException
+	public static String addBar(Bar bar) throws IOException
 	{
 		URL url = new URL(BEER_ADRESSE + "/bars");
 		HttpURLConnection conn = (HttpURLConnection) url.openConnection();
@@ -23,11 +24,46 @@ public class MyBeerServer {
 		conn.setRequestMethod("POST");
 		conn.setRequestProperty("Content-Type", "application/json");
 		
-		String input2 = bar.toString();
-		System.out.println(input2);
+		String input = bar.toString();
 		
 		OutputStream os = conn.getOutputStream();
-		os.write(input2.getBytes());
+		os.write(input.getBytes());
+		os.flush();
+		
+		if (conn.getResponseCode() != HttpURLConnection.HTTP_CREATED) {
+			throw new RuntimeException("Failed : HTTP error code : "
+				+ conn.getResponseCode());
+		}
+		
+		BufferedReader br = new BufferedReader(new InputStreamReader(
+				(conn.getInputStream())));
+ 
+		String output;
+		System.out.println("Output from Server .... \n");
+		while ((output = br.readLine()) != null) {
+			System.out.println(output);
+			if(output.contains("_id"))
+				return output.substring(output.indexOf(':')+1).replaceAll("\"", "").trim();
+			// En theorie  "_id": "549454d59ab258241958c25a" devient : 549454d59ab258241958c25a
+
+		}
+ 
+		conn.disconnect();
+		return "[MyBeerServer][Erreur][AddBar]";
+	}
+	
+	public static void updateBar(Bar bar) throws IOException
+	{
+		URL url = new URL(BEER_ADRESSE + "/bars/"+bar.getIdServer());
+		HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+		conn.setDoOutput(true);
+		conn.setRequestMethod("PUT");
+		conn.setRequestProperty("Content-Type", "application/json");
+		
+		String input = bar.toString();
+		
+		OutputStream os = conn.getOutputStream();
+		os.write(input.getBytes());
 		os.flush();
 		
 		if (conn.getResponseCode() != HttpURLConnection.HTTP_CREATED) {
@@ -43,10 +79,9 @@ public class MyBeerServer {
 		while ((output = br.readLine()) != null) {
 			System.out.println(output);
 		}
- 
 		conn.disconnect();
 	}
-	public static Beer getAllBarFromMe(LatLng myPos, int rayon)
+	public static List<Bar> getAllBarFromMe(LatLng myPos, int rayon)
 	{
 		return null;
 	}

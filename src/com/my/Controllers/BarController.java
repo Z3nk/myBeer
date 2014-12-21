@@ -10,24 +10,24 @@ public class BarController {
 
 	public static boolean addBar(Bar_DAO DAO, Bar b)
 	{
-		long idInLocalBase=DAO.add(b);
-		b.setId(idInLocalBase);
 		try {
-			MyBeerServer.addBar(b);
+			String _idInServerBase = MyBeerServer.addBar(b);
+			b.setIdServer(_idInServerBase);
 		} catch (IOException e) {
-			System.out.println("t es qu un gros con : " + e.toString());
+			System.out.println("[addBar] Erreur base de donnée externe : " + e.toString());
 		}
+		DAO.add(b);
 		return true;
 	}
 
-	public static void updateBar(Bar_DAO DAO, Bar b) {
-		long idInLocalBase=DAO.update(b);
-		b.setId(idInLocalBase);
+	public static boolean updateBar(Bar_DAO DAO, Bar b) {
+		b.addIdUpdate();
 		try {
-			MyBeerServer.addBar(b);
+			MyBeerServer.updateBar(b);
 		} catch (IOException e) {
-			System.out.println("t es qu un gros con : " + e.toString());
+			System.out.println("[updateBar] Erreur base de donnée externe : " + e.toString());
 		}
+		DAO.update(b);
 		return true;
 	}
 }

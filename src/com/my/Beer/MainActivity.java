@@ -1,5 +1,7 @@
 package com.my.Beer;
 
+import java.util.List;
+
 import android.app.Application;
 import android.app.Dialog;
 import android.content.Context;
@@ -23,9 +25,13 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.my.Controllers.MainController;
+import com.my.Entity.Bar;
+import com.my.Tools.Bar_DAO;
 
 public class MainActivity extends FragmentActivity implements
 		LocationListener {
+	private Bar_DAO DAO;
 	public GoogleMap googleMap;
 	private LocationManager lm;
 	private static final LatLng CS=new LatLng(50.611677, 3.142345);
@@ -33,34 +39,30 @@ public class MainActivity extends FragmentActivity implements
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.main_activity);
+		DAO=new Bar_DAO();
+		DAO.ouverture(this);
 
 		// On check si Google Play Services est bien installé
-		int status = GooglePlayServicesUtil
-				.isGooglePlayServicesAvailable(getBaseContext());
+		int status = GooglePlayServicesUtil.isGooglePlayServicesAvailable(getBaseContext());
 
 		// Si non, on retourne une erreur
-		if (status != ConnectionResult.SUCCESS) {
-			int requestCode = 10;
-			Dialog dialog = GooglePlayServicesUtil.getErrorDialog(status, this,
-					requestCode);
-			dialog.show();
-		} else {
-			try {
-				initilizeMap();
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-		}
+		if (status != ConnectionResult.SUCCESS)
+			GooglePlayServicesUtil.getErrorDialog(status, this, 10).show();
+		else
+			initilizeMap();
+		
 	}
 
 	/**
 	 * Initialisation de Google Map
 	 */
 	private void initilizeMap() {
+		
+		/*
+		 * instantiation && initialisation de googleMap
+		 */
 		if (googleMap == null) {
-			// On récupère la Google map du fichier layout.xml
-			googleMap = ((SupportMapFragment) getSupportFragmentManager().findFragmentById(
-					R.id.map)).getMap();
+			googleMap = ((SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map)).getMap();
 			googleMap.setOnMarkerClickListener(
 				new OnMarkerClickListener(){
 					@Override
@@ -72,7 +74,6 @@ public class MainActivity extends FragmentActivity implements
 					}
 			});
 			googleMap.setOnMapLongClickListener(new OnMapLongClickListener(){
-
 				@Override
 				public void onMapLongClick(LatLng arg0) {
 					Intent intention = new Intent(MainActivity.this.getApplicationContext(), AddBarActivity.class);
@@ -81,17 +82,19 @@ public class MainActivity extends FragmentActivity implements
 			        startActivity(intention);
 				}
 			});
-			addMarkerTest();
-			// check si la map a bien été créée ou pas
-			if (googleMap == null) {
-				// on affiche un message à l'utilisateur
-				Toast.makeText(getApplicationContext(),
-						"Désolé impossible de créer la map", Toast.LENGTH_SHORT)
-						.show();
-			} else {
-				// afficher notre position sur la carte
-				googleMap.setMyLocationEnabled(true);
-			}
+		}
+		
+
+		/*
+		 * Action sur googlemap
+		 */
+		if (googleMap == null) {
+			Toast.makeText(getApplicationContext(),
+					"Désolé impossible de créer la map", Toast.LENGTH_SHORT)
+					.show();
+		} 
+		else {
+			googleMap.setMyLocationEnabled(true);
 		}
 	}
 
@@ -101,6 +104,8 @@ public class MainActivity extends FragmentActivity implements
 		googleMap.animateCamera(CameraUpdateFactory.zoomTo(15));
 		
 	}
+	
+	
 
 	@Override
 	protected void onResume() {
@@ -128,7 +133,7 @@ public class MainActivity extends FragmentActivity implements
 		LatLng latLng = new LatLng(latitude, longitude);
 
 		// On ajout un marker sur notre position
-		googleMap.addMarker(new MarkerOptions().position(latLng).title("yolo").snippet("swag"));
+		googleMap.addMarker(new MarkerOptions().position(latLng).title("Moi").snippet("Votre position"));
 		
 		// Showing the current location in Google Map
 		googleMap.moveCamera(CameraUpdateFactory.newLatLng(latLng));
@@ -138,6 +143,14 @@ public class MainActivity extends FragmentActivity implements
 
 		// on change le text
 		textView.setText("Latitude:" + latitude + ", Longitude:" + longitude);
+		
+		// A mettre dans le onresume et recuperer une derniere position recente en variable de classe !
+		List<Bar> Bars=MainController.GetAllBarsFromMe(DAO,latLng);
+		
+		if(Bars!=null)
+			for(Bar b:Bars)
+				googleMap.addMarker(new MarkerOptions().position(b.getPos()).title(b.getName()).snippet(String.valueOf(b.getBeers().split(";").length)+" bières"));	
+			
 		
 	}
 

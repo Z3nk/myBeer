@@ -56,7 +56,6 @@ public class AddBarActivity extends Activity {
 	}
 	
 	public void enregistrer(View vue) {
-
 		bar.setName(nom.getText().toString());
 		bar.setAdress(adresse.getText().toString());
 		BarController.addBar(DAO, bar);
@@ -64,10 +63,8 @@ public class AddBarActivity extends Activity {
 	}
 
 	public void modifier(View vue) {
-
 		bar.setName(nom.getText().toString());
 		bar.setAdress(adresse.getText().toString());
-		bar.setIdUpdate();
 		BarController.updateBar(DAO, bar);
 		DAO.update(bar);
 		finish();
