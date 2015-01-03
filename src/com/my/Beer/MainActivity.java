@@ -28,19 +28,39 @@ import com.google.android.gms.maps.model.MarkerOptions;
 import com.my.Controllers.MainController;
 import com.my.Entity.Bar;
 import com.my.Tools.Bar_DAO;
+import com.my.Tools.Beer_DAO;
+import com.my.Tools.GoogleMapTools;
 
 public class MainActivity extends FragmentActivity implements
 		LocationListener {
+	/**
+	 * DAO
+	 */
+	private Beer_DAO DAO_beer;
 	private Bar_DAO DAO;
+	/**
+	 * Boolean
+	 */
+	private boolean isSynchronisedWithServer;
+	/**
+	 * Tools
+	 */
+	private LatLng lastPosition;
 	public GoogleMap googleMap;
 	private LocationManager lm;
 	private static final LatLng CS=new LatLng(50.611677, 3.142345);
+	
+	
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.main_activity);
+		isSynchronisedWithServer=false;
 		DAO=new Bar_DAO();
 		DAO.ouverture(this);
+		
+		DAO_beer=new Beer_DAO();
 
 		// On check si Google Play Services est bien installé
 		int status = GooglePlayServicesUtil.isGooglePlayServicesAvailable(getBaseContext());
@@ -50,15 +70,13 @@ public class MainActivity extends FragmentActivity implements
 			GooglePlayServicesUtil.getErrorDialog(status, this, 10).show();
 		else
 			initilizeMap();
-		
 	}
 
 	/**
 	 * Initialisation de Google Map
 	 */
 	private void initilizeMap() {
-		
-		/*
+		/**
 		 * instantiation && initialisation de googleMap
 		 */
 		if (googleMap == null) {
@@ -83,9 +101,8 @@ public class MainActivity extends FragmentActivity implements
 				}
 			});
 		}
-		
 
-		/*
+		/**
 		 * Action sur googlemap
 		 */
 		if (googleMap == null) {
@@ -119,37 +136,38 @@ public class MainActivity extends FragmentActivity implements
 		
 	}
 
+	/**
+	 * Lorsque la localisation change ..
+	 */
 	@Override
 	public void onLocationChanged(Location location) {
+		
 		TextView textView = (TextView) findViewById(R.id.fiche);
-
-		// Getting latitude of the current location
-		double latitude = location.getLatitude();
-
-		// Getting longitude of the current location
-		double longitude = location.getLongitude();
-
-		// Creating a LatLng object for the current location
-		LatLng latLng = new LatLng(latitude, longitude);
+		LatLng latLng = new LatLng(location.getLatitude(), location.getLongitude());
+		if(!isSynchronisedWithServer){
+			MainController.updateDAO(DAO, latLng);
+		}
 
 		// On ajout un marker sur notre position
-		googleMap.addMarker(new MarkerOptions().position(latLng).title("Moi").snippet("Votre position"));
+		//googleMap.addMarker(new MarkerOptions().position(latLng).title("Moi").snippet("Votre position"));
 		
 		// Showing the current location in Google Map
 		googleMap.moveCamera(CameraUpdateFactory.newLatLng(latLng));
-
 		// Zoom in the Google Map
 		googleMap.animateCamera(CameraUpdateFactory.zoomTo(15));
-
-		// on change le text
-		textView.setText("Latitude:" + latitude + ", Longitude:" + longitude);
+		textView.setText("Latitude:" + latLng.latitude + ", Longitude:" + latLng.longitude);
 		
 		// A mettre dans le onresume et recuperer une derniere position recente en variable de classe !
-		List<Bar> Bars=MainController.GetAllBarsFromMe(DAO,latLng);
+		if(lastPosition == null || 15<GoogleMapTools.DistanceBetweenPlaces(lastPosition.latitude, latLng.latitude, lastPosition.longitude, latLng.longitude)){
+			List<Bar> Bars=MainController.GetAllBarsFromMe(DAO,latLng);
+			if(Bars!=null)
+				for(Bar b:Bars)
+					GoogleMapTools.addMarker(googleMap, new MarkerOptions().position(b.getPos()).title(b.getName()).snippet(String.valueOf(b.getBeers().split(";").length)+" bières"));
+		}
+		lastPosition=latLng;
 		
-		if(Bars!=null)
-			for(Bar b:Bars)
-				googleMap.addMarker(new MarkerOptions().position(b.getPos()).title(b.getName()).snippet(String.valueOf(b.getBeers().split(";").length)+" bières"));	
+	
+				
 			
 		
 	}

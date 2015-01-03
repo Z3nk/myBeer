@@ -14,9 +14,13 @@ import com.google.android.gms.maps.model.LatLng;
 
 public class MyBeerServer {
 	
-	public static final String BEER_ADRESSE="http://192.168.1.33:3000";
+	public static final String BEER_ADRESSE="http://192.168.1.13:3000";
 	
-	public static String addBar(Bar bar) throws IOException
+	public static String getBars() throws Exception{
+		
+		return null;
+	}
+	public static String addBar(Bar bar) throws Exception
 	{
 		URL url = new URL(BEER_ADRESSE + "/bars");
 		HttpURLConnection conn = (HttpURLConnection) url.openConnection();

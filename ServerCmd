@@ -1,0 +1,7 @@
+<!-- Lancer MongoDB -->
+cd C:\Program Files\MongoDB 2.6 Standard\bin\
+mongod.exe --dbpath C:\MongoDBData\db
+
+<!-- Lancer Server -->
+node C:\Users\Z3nk\Documents\GitHub\myBeerServer\index.js
+
