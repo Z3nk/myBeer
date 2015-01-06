@@ -3,6 +3,8 @@
 .gradle
 bin/
 tmp/
+gen/
+libs/
 *.tmp
 *.bak
 *.swp
@@ -10,6 +12,9 @@ tmp/
 local.properties
 .settings/
 .loadpath
+.classpath
+proguard-project.txt
+project.properties
 
 # External tool builders
 .externalToolBuilders/
