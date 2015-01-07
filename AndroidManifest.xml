@@ -29,6 +29,9 @@
             android:name="com.google.android.maps.v2.API_KEY"
             android:value="@string/apiKey" />
         
+         <activity
+            android:name="BarActivity"
+            android:label="Page d'un bar" />
         <activity
             android:name="AddBarActivity"
             android:label="Ajouter un bar" />

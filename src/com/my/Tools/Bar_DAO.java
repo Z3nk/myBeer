@@ -53,6 +53,17 @@ public class Bar_DAO {
 	     bd.update("bar", valeurs, "id = "+bar.getId(), null);
          return bar.getId();
 	}
+	
+	public int updateFromIdServer(Bar bar) {
+		ContentValues valeurs = new ContentValues();
+		 valeurs.put("name", bar.getName());
+	     valeurs.put("pos", bar.getPos().toString());
+	     valeurs.put("adress", bar.getAdress());
+	     valeurs.put("beers", bar.getBeers());
+	     valeurs.put("idUpdate", bar.getIdUpdate());
+	     valeurs.put("idServer", bar.getIdServer());
+	     return bd.update("bar", valeurs, "idServer = ? AND idUpdate != ?", new String[] { bar.getIdServer(), Integer.toString(bar.getIdUpdate())});
+	}
 
 	public void delete(Bar bar) {
 		// TODO Auto-generated method stub

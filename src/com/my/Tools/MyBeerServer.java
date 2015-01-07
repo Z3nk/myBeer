@@ -14,11 +14,32 @@ import com.google.android.gms.maps.model.LatLng;
 
 public class MyBeerServer {
 	
-	public static final String BEER_ADRESSE="http://192.168.1.13:3000";
+	public static final String BEER_ADRESSE="http://192.168.0.11:3000";
 	
 	public static String getBars() throws Exception{
 		
-		return null;
+		URL url = new URL(BEER_ADRESSE + "/bars");
+		HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+		conn.setRequestMethod("GET");
+		conn.setRequestProperty("Accept", "application/json");
+		
+		if (conn.getResponseCode() != 200 && conn.getResponseCode() != 201) {
+			throw new RuntimeException("Failed : HTTP error code : "
+					+ conn.getResponseCode());
+		}
+ 
+		BufferedReader br = new BufferedReader(new InputStreamReader(
+			(conn.getInputStream())));
+ 
+		String yolo="";
+		String output;
+		System.out.println("Output from Server for getBars.... \n");
+		while ((output = br.readLine()) != null) {
+			System.out.println(output);
+			yolo+=output;
+		}
+		conn.disconnect();
+		return yolo;
 	}
 	public static String addBar(Bar bar) throws Exception
 	{
@@ -43,7 +64,7 @@ public class MyBeerServer {
 				(conn.getInputStream())));
  
 		String output;
-		System.out.println("Output from Server .... \n");
+		System.out.println("Output from Server addBarYolo.... \n");
 		while ((output = br.readLine()) != null) {
 			System.out.println(output);
 			if(output.contains("_id"))

@@ -56,7 +56,6 @@ public class MainActivity extends FragmentActivity implements
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.main_activity);
-		isSynchronisedWithServer=false;
 		DAO=new Bar_DAO();
 		DAO.ouverture(this);
 		
@@ -76,6 +75,7 @@ public class MainActivity extends FragmentActivity implements
 	 * Initialisation de Google Map
 	 */
 	private void initilizeMap() {
+		isSynchronisedWithServer=false;
 		/**
 		 * instantiation && initialisation de googleMap
 		 */
@@ -85,6 +85,15 @@ public class MainActivity extends FragmentActivity implements
 				new OnMarkerClickListener(){
 					@Override
 					public boolean onMarkerClick(Marker arg0) {
+						List<Bar> l = DAO.getBars();
+						for(Bar bartmp : l){
+							if(bartmp.getPos().equals(arg0.getPosition())){
+								Intent intention = new Intent(MainActivity.this.getApplicationContext(), BarActivity.class);
+								intention.putExtra("id", bartmp.getId());
+								intention.putExtra("pos", bartmp.getPos());
+						        startActivity(intention);
+							}
+						}
 						Toast.makeText(getApplicationContext(),
 								"YOLO", Toast.LENGTH_SHORT)
 								.show();
@@ -146,10 +155,8 @@ public class MainActivity extends FragmentActivity implements
 		LatLng latLng = new LatLng(location.getLatitude(), location.getLongitude());
 		if(!isSynchronisedWithServer){
 			MainController.updateDAO(DAO, latLng);
+			isSynchronisedWithServer=true;
 		}
-
-		// On ajout un marker sur notre position
-		//googleMap.addMarker(new MarkerOptions().position(latLng).title("Moi").snippet("Votre position"));
 		
 		// Showing the current location in Google Map
 		googleMap.moveCamera(CameraUpdateFactory.newLatLng(latLng));
@@ -162,7 +169,7 @@ public class MainActivity extends FragmentActivity implements
 			List<Bar> Bars=MainController.GetAllBarsFromMe(DAO,latLng);
 			if(Bars!=null)
 				for(Bar b:Bars)
-					GoogleMapTools.addMarker(googleMap, new MarkerOptions().position(b.getPos()).title(b.getName()).snippet(String.valueOf(b.getBeers().split(";").length)+" bières"));
+					GoogleMapTools.addMarker(googleMap, new MarkerOptions().position(b.getPos()).title(b.getName()).snippet(String.valueOf(b.getBeers().split(";").length - 1)+" bières"));
 		}
 		lastPosition=latLng;
 		
