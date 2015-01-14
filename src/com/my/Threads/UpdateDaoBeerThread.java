@@ -22,7 +22,7 @@ public class UpdateDaoBeerThread extends Thread {
 
 	public void run(){
 		try {
-				tab=MyBeerServer.getBars();
+				tab=MyBeerServer.getBars(latlng);
 				JSONArray JSON=new JSONArray(tab);
 				for(int i=0;i<JSON.length();i++){
 					JSONObject b=JSON.getJSONObject(i);

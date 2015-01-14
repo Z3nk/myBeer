@@ -1,6 +1,10 @@
 package com.my.Beer;
 
-import java.io.IOException;
+import com.google.android.gms.maps.model.LatLng;
+import com.my.Controllers.BarController;
+import com.my.Entity.Bar;
+import com.my.Entity.Beer;
+import com.my.Tools.Bar_DAO;
 
 import android.app.Activity;
 import android.os.Bundle;
@@ -8,27 +12,21 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
-import com.google.android.gms.maps.model.LatLng;
-import com.my.Controllers.BarController;
-import com.my.Entity.Bar;
-import com.my.Tools.Bar_DAO;
-import com.my.Tools.MyBeerServer;
-
-public class AddBarActivity extends Activity {
+public class AddBeerActivity extends Activity  {
 	
-	private Bar_DAO DAO;
-	private Bar bar;
-	private EditText nom, adresse;
+	private EditText nom, type, prix, pourcentALcool;
 	private Button enregistrer, modifier, supprimer;
+	private Beer beer;
+	
 	@Override
 	public void onCreate(Bundle bundle) {
 		super.onCreate(bundle);
-		setContentView(R.layout.addbar_activity);
-		DAO=new Bar_DAO();
-		DAO.ouverture(this);
-		bar=new Bar();
+		setContentView(R.layout.addbeer_activity);
+		beer=new Beer();
 		nom = (EditText) findViewById(R.id.nom);
-		adresse = (EditText) findViewById(R.id.adresse);
+		type= (EditText) findViewById(R.id.type);
+		prix = (EditText) findViewById(R.id.prix);
+		pourcentALcool = (EditText) findViewById(R.id.pourcentAlcol);
 		enregistrer = (Button) findViewById(R.id.enregistrer);
 		modifier = (Button) findViewById(R.id.modifier);
 		supprimer = (Button) findViewById(R.id.supprimer);
@@ -38,7 +36,7 @@ public class AddBarActivity extends Activity {
 	protected void onStart() {
 		super.onStart();
 		Bundle donnees = getIntent().getExtras();
-		bar.setPos((LatLng) donnees.getParcelable("pos"));
+		/*bar.setPos((LatLng) donnees.getParcelable("pos"));
 		if (donnees.getInt("id") != -1) {
 			enregistrer.setEnabled(false);
 			modifier.setEnabled(true);
@@ -52,27 +50,20 @@ public class AddBarActivity extends Activity {
 			enregistrer.setEnabled(true);
 			modifier.setEnabled(false);
 			supprimer.setEnabled(false);
-		}
+		}*/
+	
 	}
 	
 	public void enregistrer(View vue) {
-		bar.setName(nom.getText().toString());
-		bar.setAdress(adresse.getText().toString());
-		BarController.addBar(DAO, bar);
-		finish();
+		
 	}
 
 	public void modifier(View vue) {
-		bar.setName(nom.getText().toString());
-		bar.setAdress(adresse.getText().toString());
-		BarController.updateBar(DAO, bar);
-		DAO.update(bar);
-		finish();
+		
 	}
 
 	public void supprimer(View vue) {
-		DAO.delete(bar);
-		finish();
+	
 	}
 
 	@Override

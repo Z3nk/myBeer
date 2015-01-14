@@ -14,11 +14,12 @@ import com.google.android.gms.maps.model.LatLng;
 
 public class MyBeerServer {
 	
-	public static final String BEER_ADRESSE="http://192.168.0.11:3000";
+	public static final String BEER_ADRESSE="http://172.19.153.153:3000";
 	
-	public static String getBars() throws Exception{
+	public static String getBars(LatLng latlng) throws Exception{
 		
-		URL url = new URL(BEER_ADRESSE + "/bars");
+		System.out.println("[getBars] : /bars?lon="+latlng.longitude+"&lat="+latlng.latitude);
+		URL url = new URL(BEER_ADRESSE + "/bars?lon="+latlng.longitude+"&lat="+latlng.latitude);
 		HttpURLConnection conn = (HttpURLConnection) url.openConnection();
 		conn.setRequestMethod("GET");
 		conn.setRequestProperty("Accept", "application/json");

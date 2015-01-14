@@ -29,11 +29,13 @@ public class MainController {
 	public static List<Bar> GetAllBarsFromMe(Bar_DAO DAO, LatLng latLng) {
 		List<Bar> L=DAO.getBars();
 		List<Bar> L2=new ArrayList<Bar>();
+		System.out.println("Taille de la liste " + L.size());
 		for(Bar b:L)
 			if(GoogleMapTools.DistanceBetweenPlaces(b.getPos().longitude, b.getPos().latitude, latLng.longitude, latLng.latitude)<15)
 				L2.add(b);
 		if(L2.size()>0)
 			return L2;
+		System.out.println(" Apparement ils sont trop loin les bars");
 		return null;
 	}
 

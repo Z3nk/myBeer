@@ -1,6 +1,7 @@
 package com.my.Entity;
 
 import com.google.android.gms.maps.model.LatLng;
+import com.my.Tools.GoogleMapTools;
 
 public class Bar {
 	private long id;
@@ -63,7 +64,7 @@ public class Bar {
 	
 	@Override
 	public String toString(){
-		return "{\"id\":"+id+",\"name\":\""+name+"\",\"adress\":\""+adress+"\",\"pos\":\""+pos.toString()+"\",\"beers\":\""+beers+"\",\"idupdate\":\""+idUpdate+"\"}";
+		return "{\"id\":"+id+",\"name\":\""+name+"\",\"adress\":\""+adress+"\",\"pos\":\""+GoogleMapTools.fromLatLng(pos)+"\",\"beers\":\""+beers+"\",\"idupdate\":\""+idUpdate+"\"}";
 	}
 	public String getIdServer() {
 		return idServer;
@@ -72,9 +73,9 @@ public class Bar {
 		this.idServer = idServer;
 	}
 	public void setPosFromToString(String string) {
-		//"pos": "lat/lng: (51.012837930934545,2.406480610370636)",
-		double lat=Double.parseDouble(string.substring(string.indexOf('(')+1,string.indexOf(')')).split(",")[0]);
-		double lng=Double.parseDouble(string.substring(string.indexOf('(')+1,string.indexOf(')')).split(",")[1]);
+		string = string.replace("[", "").replace("]", "").trim();
+		double lat=Double.parseDouble(string.split(",")[1]);
+		double lng=Double.parseDouble(string.split(",")[0]);
 		pos=new LatLng(lat,lng);
 		
 	}

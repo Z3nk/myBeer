@@ -41,7 +41,9 @@ public class MainActivity extends FragmentActivity implements
 	/**
 	 * Boolean
 	 */
-	private boolean isSynchronisedWithServer;
+	public static boolean isSynchronisedWithServer;
+	private boolean isSynchroniseWithServerDisplay;
+	private boolean threadIsWorking;
 	/**
 	 * Tools
 	 */
@@ -76,6 +78,8 @@ public class MainActivity extends FragmentActivity implements
 	 */
 	private void initilizeMap() {
 		isSynchronisedWithServer=false;
+		isSynchroniseWithServerDisplay=false;
+		threadIsWorking=false;
 		/**
 		 * instantiation && initialisation de googleMap
 		 */
@@ -89,6 +93,7 @@ public class MainActivity extends FragmentActivity implements
 						for(Bar bartmp : l){
 							if(bartmp.getPos().equals(arg0.getPosition())){
 								Intent intention = new Intent(MainActivity.this.getApplicationContext(), BarActivity.class);
+								System.out.println(bartmp.toString());
 								intention.putExtra("id", bartmp.getId());
 								intention.putExtra("pos", bartmp.getPos());
 						        startActivity(intention);
@@ -150,26 +155,38 @@ public class MainActivity extends FragmentActivity implements
 	 */
 	@Override
 	public void onLocationChanged(Location location) {
-		
 		TextView textView = (TextView) findViewById(R.id.fiche);
 		LatLng latLng = new LatLng(location.getLatitude(), location.getLongitude());
-		if(!isSynchronisedWithServer){
+		boolean isJustSynchroniseNeedToAddMarker = false;
+		if(!isSynchronisedWithServer && !threadIsWorking){
 			MainController.updateDAO(DAO, latLng);
-			isSynchronisedWithServer=true;
+			threadIsWorking=true;
+		}else{
+			if(isSynchroniseWithServerDisplay==false)
+				isJustSynchroniseNeedToAddMarker=true;
 		}
 		
-		// Showing the current location in Google Map
-		googleMap.moveCamera(CameraUpdateFactory.newLatLng(latLng));
-		// Zoom in the Google Map
-		googleMap.animateCamera(CameraUpdateFactory.zoomTo(15));
+		
 		textView.setText("Latitude:" + latLng.latitude + ", Longitude:" + latLng.longitude);
 		
 		// A mettre dans le onresume et recuperer une derniere position recente en variable de classe !
-		if(lastPosition == null || 15<GoogleMapTools.DistanceBetweenPlaces(lastPosition.latitude, latLng.latitude, lastPosition.longitude, latLng.longitude)){
+		if(isJustSynchroniseNeedToAddMarker || lastPosition == null || 15<GoogleMapTools.DistanceBetweenPlaces(latLng.longitude,latLng.latitude,lastPosition.longitude,lastPosition.latitude)){
+			System.out.println("isJustSynchroniseNeedToAddMarker : "+ isJustSynchroniseNeedToAddMarker);
+			if(lastPosition != null) 
+				System.out.println(GoogleMapTools.DistanceBetweenPlaces(latLng.longitude,latLng.latitude,lastPosition.longitude,lastPosition.latitude));
+			System.out.println("lastPosition == null : "+ (lastPosition == null));
+			// Showing the current location in Google Map
+			googleMap.moveCamera(CameraUpdateFactory.newLatLng(latLng));
+			// Zoom in the Google Map
+			googleMap.animateCamera(CameraUpdateFactory.zoomTo(15));
 			List<Bar> Bars=MainController.GetAllBarsFromMe(DAO,latLng);
 			if(Bars!=null)
 				for(Bar b:Bars)
 					GoogleMapTools.addMarker(googleMap, new MarkerOptions().position(b.getPos()).title(b.getName()).snippet(String.valueOf(b.getBeers().split(";").length - 1)+" bières"));
+			if(isJustSynchroniseNeedToAddMarker){
+				isSynchroniseWithServerDisplay=true;
+				isJustSynchroniseNeedToAddMarker=false;
+			}
 		}
 		lastPosition=latLng;
 		

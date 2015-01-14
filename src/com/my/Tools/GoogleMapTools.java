@@ -17,7 +17,6 @@ public class GoogleMapTools {
     {
         return x * PI / 180;
     }
-	
 	public static double DistanceBetweenPlaces(double lon1,double lat1,double lon2,double lat2)
 	{
         double dlon =  Radians(lon2 - lon1);
@@ -33,5 +32,9 @@ public class GoogleMapTools {
 			googleMap.addMarker(snippet);
 			listMarker.put(snippet.getPosition(),snippet);
 		}
+	}
+
+	public static String fromLatLng(LatLng pos) {
+		return "["+pos.longitude+","+pos.latitude+"]";
 	}
 }

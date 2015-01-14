@@ -1,11 +1,13 @@
 package com.my.Threads;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
 
 import com.google.android.gms.maps.model.LatLng;
+import com.my.Beer.MainActivity;
 import com.my.Entity.Bar;
 import com.my.Tools.Bar_DAO;
 import com.my.Tools.MyBeerServer;
@@ -21,7 +23,8 @@ public class UpdateDaoThread extends Thread {
 	}
 	public void run(){
 		try {
-				tab=MyBeerServer.getBars();
+				tab=MyBeerServer.getBars(this.latlng);
+				ArrayList<Bar> L=dAO.getBars();
 				JSONArray JSON=new JSONArray(tab);
 				for(int i=0;i<JSON.length();i++){
 					JSONObject b=JSON.getJSONObject(i);
@@ -36,6 +39,7 @@ public class UpdateDaoThread extends Thread {
 					if(res==0)
 						dAO.add(b2);
 				}
+				MainActivity.isSynchronisedWithServer = true;
 			} catch (Exception e) {
 			e.printStackTrace();
 		}
