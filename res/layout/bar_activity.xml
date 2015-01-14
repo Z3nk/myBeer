@@ -53,7 +53,8 @@
             android:id="@+id/addBeer"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Button" />
+            android:text="Ajouter une bière"
+            android:onClick="addNewBeer" />
 
     </LinearLayout>
 
