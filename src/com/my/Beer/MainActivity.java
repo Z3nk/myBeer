@@ -93,7 +93,7 @@ public class MainActivity extends FragmentActivity implements
 						for(Bar bartmp : l){
 							if(bartmp.getPos().equals(arg0.getPosition())){
 								Intent intention = new Intent(MainActivity.this.getApplicationContext(), BarActivity.class);
-								System.out.println(bartmp.toString());
+								System.out.println("[MainActivity][onMarkerClick][96]"+bartmp.toString());
 								intention.putExtra("id", bartmp.getId());
 								intention.putExtra("pos", bartmp.getPos());
 						        startActivity(intention);
@@ -171,10 +171,6 @@ public class MainActivity extends FragmentActivity implements
 		
 		// A mettre dans le onresume et recuperer une derniere position recente en variable de classe !
 		if(isJustSynchroniseNeedToAddMarker || lastPosition == null || 15<GoogleMapTools.DistanceBetweenPlaces(latLng.longitude,latLng.latitude,lastPosition.longitude,lastPosition.latitude)){
-			System.out.println("isJustSynchroniseNeedToAddMarker : "+ isJustSynchroniseNeedToAddMarker);
-			if(lastPosition != null) 
-				System.out.println(GoogleMapTools.DistanceBetweenPlaces(latLng.longitude,latLng.latitude,lastPosition.longitude,lastPosition.latitude));
-			System.out.println("lastPosition == null : "+ (lastPosition == null));
 			// Showing the current location in Google Map
 			googleMap.moveCamera(CameraUpdateFactory.newLatLng(latLng));
 			// Zoom in the Google Map

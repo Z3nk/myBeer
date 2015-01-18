@@ -29,13 +29,12 @@ public class MainController {
 	public static List<Bar> GetAllBarsFromMe(Bar_DAO DAO, LatLng latLng) {
 		List<Bar> L=DAO.getBars();
 		List<Bar> L2=new ArrayList<Bar>();
-		System.out.println("Taille de la liste " + L.size());
+		System.out.println("[MainController][GetAllBarsFromMe][32] Taille de la liste en BDD locale" + L.size());
 		for(Bar b:L)
-			if(GoogleMapTools.DistanceBetweenPlaces(b.getPos().longitude, b.getPos().latitude, latLng.longitude, latLng.latitude)<15)
-				L2.add(b);
+				L2.add(b);//if(GoogleMapTools.DistanceBetweenPlaces(b.getPos().longitude, b.getPos().latitude, latLng.longitude, latLng.latitude)<15)
 		if(L2.size()>0)
 			return L2;
-		System.out.println(" Apparement ils sont trop loin les bars");
+		System.out.println("[MainController][GetAllBarsFromMe][37] Apparement ils sont trop loin les bars");
 		return null;
 	}
 

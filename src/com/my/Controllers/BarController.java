@@ -20,7 +20,7 @@ public class BarController {
 		try {
 			MyBeerServer.updateBar(b);
 		} catch (IOException e) {
-			System.out.println("[updateBar] Erreur base de donnée externe : " + e.toString());
+			System.out.println("[BarController][updateBar][23] Erreur base de donnée externe : " + e.toString());
 		}
 		DAO.update(b);
 		return true;

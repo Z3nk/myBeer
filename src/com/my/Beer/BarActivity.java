@@ -37,7 +37,7 @@ public class BarActivity extends Activity {
 		bar.setPos((LatLng) donnees.getParcelable("pos"));
 		if (donnees.getLong("id") != -1) {
 			bar = DAO.getBar(donnees.getLong("id"));
-			System.out.println(bar.toString());
+			System.out.println("[BarActivity][OnStart][40]" + bar.toString());
 			nom.setText(bar.getName());
 			adress.setText(bar.getAdress());
 		}

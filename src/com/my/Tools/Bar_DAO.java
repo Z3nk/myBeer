@@ -68,12 +68,12 @@ public class Bar_DAO {
 	public int updateFromIdServer(Bar bar) {
 		ContentValues valeurs = new ContentValues();
 		 valeurs.put("name", bar.getName());
-	     valeurs.put("pos", bar.getPos().toString());
+	     valeurs.put("pos", GoogleMapTools.fromLatLng(bar.getPos()));
 	     valeurs.put("adress", bar.getAdress());
 	     valeurs.put("beers", bar.getBeers());
 	     valeurs.put("idUpdate", bar.getIdUpdate());
 	     valeurs.put("idServer", bar.getIdServer());
-	     return bd.update("bar", valeurs, "idServer = ?", new String[] { bar.getIdServer()});// AND idUpdate != ? , Integer.toString(bar.getIdUpdate())
+	     return bd.update("bar", valeurs, "idServer LIKE ? AND idUpdate<>?", new String[] { bar.getIdServer(), Integer.toString(bar.getIdUpdate())});// AND idUpdate != ? , Integer.toString(bar.getIdUpdate())
 	}
 
 	public void delete(Bar bar) {

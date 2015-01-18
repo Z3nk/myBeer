@@ -10,6 +10,7 @@ import com.google.android.gms.maps.model.LatLng;
 import com.my.Beer.MainActivity;
 import com.my.Entity.Bar;
 import com.my.Tools.Bar_DAO;
+import com.my.Tools.GoogleMapTools;
 import com.my.Tools.MyBeerServer;
 
 public class UpdateDaoThread extends Thread {
@@ -35,6 +36,7 @@ public class UpdateDaoThread extends Thread {
 					b2.setBeers(b.getString("beers"));
 					b2.setIdUpdate(b.getInt("idupdate"));
 					b2.setIdServer(b.getString("_id"));
+					System.out.println("[UpdateDaoThread][Run][39] On recherche un bar :"+b2.toString()+" id Serveur:"+b2.getIdServer());
 					int res=dAO.updateFromIdServer(b2);
 					if(res==0)
 						dAO.add(b2);
@@ -42,6 +44,7 @@ public class UpdateDaoThread extends Thread {
 				MainActivity.isSynchronisedWithServer = true;
 			} catch (Exception e) {
 			e.printStackTrace();
+			// Afficher ici message erreur connection avec le serveur a l utilisateur 
 		}
 	}
 }

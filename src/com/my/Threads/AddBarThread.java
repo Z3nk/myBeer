@@ -17,9 +17,10 @@ public class AddBarThread extends Thread {
        System.out.println("AddBarThread running");
        try {
 			String _idInServerBase = MyBeerServer.addBar(b);
+			System.out.println("[AddBarThread][Run][20] On a ajouter un bar avec un idserveur :"+_idInServerBase);
 			b.setIdServer(_idInServerBase);
 		} catch (Exception e) {
-			System.out.println("[addBar] Erreur base de donnée externe : " + e.toString());
+			System.out.println("[AddBarThread][Run][23] Erreur base de donnée externe : " + e.toString());
 		}
        dAO.add(b);
     }

@@ -14,11 +14,11 @@ import com.google.android.gms.maps.model.LatLng;
 
 public class MyBeerServer {
 	
-	public static final String BEER_ADRESSE="http://172.19.153.153:3000";
+	public static final String BEER_ADRESSE="http://192.168.1.12:3000";
 	
 	public static String getBars(LatLng latlng) throws Exception{
 		
-		System.out.println("[getBars] : /bars?lon="+latlng.longitude+"&lat="+latlng.latitude);
+		System.out.println("[MyBeerServer][getBars][21] : /bars?lon="+latlng.longitude+"&lat="+latlng.latitude);
 		URL url = new URL(BEER_ADRESSE + "/bars?lon="+latlng.longitude+"&lat="+latlng.latitude);
 		HttpURLConnection conn = (HttpURLConnection) url.openConnection();
 		conn.setRequestMethod("GET");
@@ -34,9 +34,8 @@ public class MyBeerServer {
  
 		String yolo="";
 		String output;
-		System.out.println("Output from Server for getBars.... \n");
+		System.out.println("[MyBeerServer][getBars][37] \n");
 		while ((output = br.readLine()) != null) {
-			System.out.println(output);
 			yolo+=output;
 		}
 		conn.disconnect();
@@ -65,9 +64,8 @@ public class MyBeerServer {
 				(conn.getInputStream())));
  
 		String output;
-		System.out.println("Output from Server addBarYolo.... \n");
+		System.out.println("[MyBeerServer][addBar][68].... \n");
 		while ((output = br.readLine()) != null) {
-			System.out.println(output);
 			if(output.contains("_id"))
 				return output.substring(output.indexOf(':')+1).replaceAll("\"", "").trim();
 			// En theorie  "_id": "549454d59ab258241958c25a" devient : 549454d59ab258241958c25a
@@ -75,7 +73,7 @@ public class MyBeerServer {
 		}
  
 		conn.disconnect();
-		return "[MyBeerServer][Erreur][AddBar]";
+		return "[MyBeerServer][addBar][Erreur]";
 	}
 	
 	public static void updateBar(Bar bar) throws IOException
@@ -101,9 +99,8 @@ public class MyBeerServer {
 				(conn.getInputStream())));
  
 		String output;
-		System.out.println("Output from Server .... \n");
+		System.out.println("[MyBeerServer][updateBar][103] .... \n");
 		while ((output = br.readLine()) != null) {
-			System.out.println(output);
 		}
 		conn.disconnect();
 	}

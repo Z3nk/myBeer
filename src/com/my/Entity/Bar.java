@@ -74,8 +74,17 @@ public class Bar {
 	}
 	public void setPosFromToString(String string) {
 		string = string.replace("[", "").replace("]", "").trim();
-		double lat=Double.parseDouble(string.split(",")[1]);
-		double lng=Double.parseDouble(string.split(",")[0]);
+		double lat;
+		double lng;
+		if(string.contains(")")){
+			string=string.split(":")[1].replace("(", "").replace(")", "").trim();
+			lat=Double.parseDouble(string.split(",")[0]);
+			lng=Double.parseDouble(string.split(",")[1]);
+		}
+		else{
+		lat=Double.parseDouble(string.split(",")[1]);
+		lng=Double.parseDouble(string.split(",")[0]);
+		}
 		pos=new LatLng(lat,lng);
 		
 	}
