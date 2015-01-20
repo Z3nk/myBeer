@@ -38,8 +38,13 @@ public class UpdateDaoThread extends Thread {
 					b2.setIdServer(b.getString("_id"));
 					System.out.println("[UpdateDaoThread][Run][39] On recherche un bar :"+b2.toString()+" id Serveur:"+b2.getIdServer());
 					int res=dAO.updateFromIdServer(b2);
-					if(res==0)
+					if(res==0){
 						dAO.add(b2);
+						System.out.println("[UpdateDaoThread][Run][43] On rajoute un bar");
+					}
+					else{
+						System.out.println("[UpdateDaoThread][Run][46] On update " + res + " bar");
+					}
 				}
 				MainActivity.isSynchronisedWithServer = true;
 			} catch (Exception e) {

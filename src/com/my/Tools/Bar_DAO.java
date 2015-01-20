@@ -73,7 +73,7 @@ public class Bar_DAO {
 	     valeurs.put("beers", bar.getBeers());
 	     valeurs.put("idUpdate", bar.getIdUpdate());
 	     valeurs.put("idServer", bar.getIdServer());
-	     return bd.update("bar", valeurs, "idServer LIKE ? AND idUpdate<>?", new String[] { bar.getIdServer(), Integer.toString(bar.getIdUpdate())});// AND idUpdate != ? , Integer.toString(bar.getIdUpdate())
+	     return bd.update("bar", valeurs, "idServer = ? ", new String[] { bar.getIdServer()});// AND idUpdate != ? , Integer.toString(bar.getIdUpdate())
 	}
 
 	public void delete(Bar bar) {
