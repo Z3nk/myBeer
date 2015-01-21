@@ -168,7 +168,7 @@ public class MainActivity extends FragmentActivity implements
 		if(Bars!=null)
 			for(Bar b:Bars)
 				GoogleMapTools.addMarker(googleMap,
-		new MarkerOptions().position(b.getPos()).title(b.getName()).snippet(String.valueOf(b.getBeers().split(";").length - 1)+" bieres"));
+		new MarkerOptions().position(b.getPos()).title(b.getName()).snippet(String.valueOf(b.getBeers().split(";").length)+" bieres"));
 		
 	}
 

@@ -53,7 +53,7 @@ public class UpdateDaoThread extends Thread {
 					String[] tab2;
 					tab2=b2.getBeers().split(";");
 					for(int y=0;y<tab2.length;y++){
-						String s=MyBeerServer.updateBeer(tab2[i]);
+						String s=MyBeerServer.updateBeer(tab2[y]);
 						JSONObject J=new JSONObject(s);
 						Beer beer2=new Beer();
 						beer2.setName(J.getString("name"));
