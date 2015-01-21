@@ -69,6 +69,7 @@ public class BarActivity extends Activity {
 	@Override
 	protected void onDestroy() {
 		super.onDestroy();
+		DAO.fermeture();
 	}
 
 }

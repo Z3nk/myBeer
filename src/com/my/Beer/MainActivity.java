@@ -19,6 +19,7 @@ import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GooglePlayServicesUtil;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.GoogleMap.OnInfoWindowClickListener;
 import com.google.android.gms.maps.GoogleMap.OnMapLongClickListener;
 import com.google.android.gms.maps.GoogleMap.OnMarkerClickListener;
 import com.google.android.gms.maps.SupportMapFragment;
@@ -63,7 +64,7 @@ public class MainActivity extends FragmentActivity implements
 		
 		DAO_beer=new Beer_DAO();
 
-		// On check si Google Play Services est bien installé
+		// On check si Google Play Services est bien installï¿½
 		int status = GooglePlayServicesUtil.isGooglePlayServicesAvailable(getBaseContext());
 
 		// Si non, on retourne une erreur
@@ -88,8 +89,13 @@ public class MainActivity extends FragmentActivity implements
 			googleMap.setOnMarkerClickListener(
 				new OnMarkerClickListener(){
 					@Override
-					public boolean onMarkerClick(Marker arg0) {
-						List<Bar> l = DAO.getBars();
+					public boolean onMarkerClick(Marker marker) {
+						/* ne fonctionne pas pour l'instant */
+						if (!marker.isInfoWindowShown())
+			                marker.showInfoWindow();
+			            else 
+			                marker.hideInfoWindow();
+						/*List<Bar> l = DAO.getBars();
 						for(Bar bartmp : l){
 							if(bartmp.getPos().equals(arg0.getPosition())){
 								Intent intention = new Intent(MainActivity.this.getApplicationContext(), BarActivity.class);
@@ -101,10 +107,28 @@ public class MainActivity extends FragmentActivity implements
 						}
 						Toast.makeText(getApplicationContext(),
 								"YOLO", Toast.LENGTH_SHORT)
-								.show();
+								.show();*/
 						return false;
 					}
 			});
+			googleMap.setOnInfoWindowClickListener(
+					new OnInfoWindowClickListener() {
+						
+						@Override
+						public void onInfoWindowClick(Marker arg0) {
+							// TODO Auto-generated method stub
+							List<Bar> l = DAO.getBars();
+							for(Bar bartmp : l){
+								if(bartmp.getPos().equals(arg0.getPosition())){
+									Intent intention = new Intent(MainActivity.this.getApplicationContext(), BarActivity.class);
+									System.out.println("[MainActivity][onMarkerClick][96]"+bartmp.toString());
+									intention.putExtra("id", bartmp.getId());
+									intention.putExtra("pos", bartmp.getPos());
+							        startActivity(intention);
+								}
+							}
+						}
+					});
 			googleMap.setOnMapLongClickListener(new OnMapLongClickListener(){
 				@Override
 				public void onMapLongClick(LatLng arg0) {
@@ -121,32 +145,29 @@ public class MainActivity extends FragmentActivity implements
 		 */
 		if (googleMap == null) {
 			Toast.makeText(getApplicationContext(),
-					"Désolé impossible de créer la map", Toast.LENGTH_SHORT)
+					"Desole impossible de creer la map", Toast.LENGTH_SHORT)
 					.show();
 		} 
 		else {
 			googleMap.setMyLocationEnabled(true);
 		}
-	}
-
-	private void addMarkerTest() {
-		Marker CSMarker = googleMap.addMarker(new MarkerOptions().position(CS).title("CS").snippet("notre metro"));
-		googleMap.moveCamera(CameraUpdateFactory.newLatLng(CS));
-		googleMap.animateCamera(CameraUpdateFactory.zoomTo(15));
-		
-	}
-	
-	
+	}	
 
 	@Override
 	protected void onResume() {
 		super.onResume();
 		initilizeMap();
-		// on réinitialise la map lorsque l'on résume l'appli
+		// on reinitialise la map lorsque l'on resume l'appli
 		lm = (LocationManager) this.getSystemService(LOCATION_SERVICE);
 		if (lm.isProviderEnabled(LocationManager.GPS_PROVIDER))
 			lm.requestLocationUpdates(LocationManager.GPS_PROVIDER, 10000, 0, this);
 		lm.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 10000, 0, this);
+		
+		List<Bar> Bars=MainController.GetAllBarsFromMe(DAO,lastPosition);
+		if(Bars!=null)
+			for(Bar b:Bars)
+				GoogleMapTools.addMarker(googleMap,
+		new MarkerOptions().position(b.getPos()).title(b.getName()).snippet(String.valueOf(b.getBeers().split(";").length - 1)+" bieres"));
 		
 	}
 
@@ -178,7 +199,7 @@ public class MainActivity extends FragmentActivity implements
 			List<Bar> Bars=MainController.GetAllBarsFromMe(DAO,latLng);
 			if(Bars!=null)
 				for(Bar b:Bars)
-					GoogleMapTools.addMarker(googleMap, new MarkerOptions().position(b.getPos()).title(b.getName()).snippet(String.valueOf(b.getBeers().split(";").length - 1)+" bières"));
+					GoogleMapTools.addMarker(googleMap, new MarkerOptions().position(b.getPos()).title(b.getName()).snippet(String.valueOf(b.getBeers().split(";").length - 1)+" biï¿½res"));
 			if(isJustSynchroniseNeedToAddMarker){
 				isSynchroniseWithServerDisplay=true;
 				isJustSynchroniseNeedToAddMarker=false;
