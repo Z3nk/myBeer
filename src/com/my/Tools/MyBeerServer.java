@@ -23,8 +23,8 @@ public class MyBeerServer {
 
 		System.out.println("[MyBeerServer][getBars][21] : /bars?lon="
 				+ latlng.longitude + "&lat=" + latlng.latitude);
-		URL url = new URL(BEER_ADRESSE + "/bars?lon=" + latlng.longitude
-				+ "&lat=" + latlng.latitude);
+		URL url = new URL(BEER_ADRESSE + "/bars?lon=" + latlng.longitude + "&lat=" + latlng.latitude);
+
 		HttpURLConnection conn = (HttpURLConnection) url.openConnection();
 		conn.setRequestMethod("GET");
 		conn.setRequestProperty("Accept", "application/json");

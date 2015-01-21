@@ -6,5 +6,7 @@
     <string name="action_settings">Settings</string>
     <string name="label">Hello</string>
     <string name="apiKey">AIzaSyAXnCUsDU3FFH2oPMQzXLW3qT04DbH6Qe0</string>
+    <string name="splash_description">Splashscreen</string>
+    <string name="textSplashScreen">myBeer</string>
 
 </resources>

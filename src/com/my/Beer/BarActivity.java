@@ -122,6 +122,7 @@ public class BarActivity extends ListActivity {
 	@Override
 	protected void onDestroy() {
 		super.onDestroy();
+		DAO.fermeture();
 	}
 
 }
