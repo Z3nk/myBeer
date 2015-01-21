@@ -2,9 +2,11 @@ package com.my.Beer;
 
 import com.google.android.gms.maps.model.LatLng;
 import com.my.Controllers.BarController;
+import com.my.Controllers.BeerController;
 import com.my.Entity.Bar;
 import com.my.Entity.Beer;
 import com.my.Tools.Bar_DAO;
+import com.my.Tools.Beer_DAO;
 
 import android.app.Activity;
 import android.os.Bundle;
@@ -17,11 +19,18 @@ public class AddBeerActivity extends Activity  {
 	private EditText nom, type, prix, pourcentALcool;
 	private Button enregistrer, modifier, supprimer;
 	private Beer beer;
+	private Beer_DAO DAO;
+	private Bar_DAO DAO_Bar;
+	private long idBar;
 	
 	@Override
 	public void onCreate(Bundle bundle) {
 		super.onCreate(bundle);
 		setContentView(R.layout.addbeer_activity);
+		DAO=new Beer_DAO();
+		DAO.ouverture(this);
+		DAO_Bar=new Bar_DAO();
+		DAO_Bar.ouverture(this);
 		beer=new Beer();
 		nom = (EditText) findViewById(R.id.nom);
 		type= (EditText) findViewById(R.id.type);
@@ -36,6 +45,7 @@ public class AddBeerActivity extends Activity  {
 	protected void onStart() {
 		super.onStart();
 		Bundle donnees = getIntent().getExtras();
+		idBar=donnees.getLong("idBar");
 		/*bar.setPos((LatLng) donnees.getParcelable("pos"));
 		if (donnees.getInt("id") != -1) {
 			enregistrer.setEnabled(false);
@@ -55,7 +65,12 @@ public class AddBeerActivity extends Activity  {
 	}
 	
 	public void enregistrer(View vue) {
-		
+		beer.setName(nom.getText().toString());
+		beer.setType(nom.getText().toString());
+		beer.setPrix(nom.getText().toString());
+		beer.setPourcentAlcool(nom.getText().toString());
+		BeerController.addBeer(DAO, beer,idBar,DAO_Bar);
+		finish();
 	}
 
 	public void modifier(View vue) {

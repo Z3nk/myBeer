@@ -26,13 +26,11 @@
         android:id="@+id/prix"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:inputType="number"
         android:hint="Prix ?" />
     <EditText
         android:id="@+id/pourcentAlcol"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:inputType="number"
         android:hint="% Alcool ?" />
     <LinearLayout
         android:layout_width="match_parent"

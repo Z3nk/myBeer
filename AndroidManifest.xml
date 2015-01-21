@@ -32,6 +32,9 @@
          <activity
             android:name="BarActivity"
             android:label="Page d'un bar" />
+          <activity
+            android:name="AddBeerActivity"
+            android:label="Ajouter une biere" />
         <activity
             android:name="AddBarActivity"
             android:label="Ajouter un bar" />

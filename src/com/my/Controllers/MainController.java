@@ -13,9 +13,9 @@ import com.my.Tools.GoogleMapTools;
 import com.my.Tools.MyBeerServer;
 
 public class MainController {
-	public static void updateDAO(Bar_DAO DAO, LatLng latlng)
+	public static void updateDAO(Bar_DAO DAO, Beer_DAO beer_dao, LatLng latlng)
 	{
-		new UpdateDaoThread(DAO, latlng).start();
+		new UpdateDaoThread(DAO, beer_dao, latlng).start();
 	}
 	
 	

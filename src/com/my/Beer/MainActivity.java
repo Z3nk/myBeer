@@ -62,6 +62,7 @@ public class MainActivity extends FragmentActivity implements
 		DAO.ouverture(this);
 		
 		DAO_beer=new Beer_DAO();
+		DAO_beer.ouverture(this);
 
 		// On check si Google Play Services est bien installé
 		int status = GooglePlayServicesUtil.isGooglePlayServicesAvailable(getBaseContext());
@@ -159,7 +160,7 @@ public class MainActivity extends FragmentActivity implements
 		LatLng latLng = new LatLng(location.getLatitude(), location.getLongitude());
 		boolean isJustSynchroniseNeedToAddMarker = false;
 		if(!isSynchronisedWithServer && !threadIsWorking){
-			MainController.updateDAO(DAO, latLng);
+			MainController.updateDAO(DAO, DAO_beer, latLng);
 			threadIsWorking=true;
 		}else{
 			if(isSynchroniseWithServerDisplay==false)

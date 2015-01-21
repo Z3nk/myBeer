@@ -44,9 +44,10 @@
         </LinearLayout>
 
         <ListView
-            android:id="@+id/listBeer"
+            android:id="@android:id/list"
             android:layout_width="match_parent"
-            android:layout_height="422dp" >
+            android:layout_height="422dp"
+            android:clickable="true" >
         </ListView>
 
         <Button

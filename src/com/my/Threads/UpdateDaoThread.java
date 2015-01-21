@@ -9,16 +9,20 @@ import org.json.JSONObject;
 import com.google.android.gms.maps.model.LatLng;
 import com.my.Beer.MainActivity;
 import com.my.Entity.Bar;
+import com.my.Entity.Beer;
 import com.my.Tools.Bar_DAO;
+import com.my.Tools.Beer_DAO;
 import com.my.Tools.GoogleMapTools;
 import com.my.Tools.MyBeerServer;
 
 public class UpdateDaoThread extends Thread {
 	private Bar_DAO dAO;
+	private Beer_DAO beer_dao;
 	private LatLng latlng;
 	public String tab;
-    public UpdateDaoThread(Bar_DAO dAO, LatLng latlng) {
+    public UpdateDaoThread(Bar_DAO dAO, Beer_DAO beer_dao, LatLng latlng) {
 		this.dAO=dAO;
+		this.beer_dao=beer_dao;
 		this.latlng=latlng;
 		tab="not init yet";
 	}
@@ -44,6 +48,28 @@ public class UpdateDaoThread extends Thread {
 					}
 					else{
 						System.out.println("[UpdateDaoThread][Run][46] On update " + res + " bar");
+					}
+					
+					String[] tab2;
+					tab2=b2.getBeers().split(";");
+					for(int y=0;y<tab2.length;y++){
+						String s=MyBeerServer.updateBeer(tab2[i]);
+						JSONObject J=new JSONObject(s);
+						Beer beer2=new Beer();
+						beer2.setName(J.getString("name"));
+						beer2.setType(J.getString("type"));
+						beer2.setPrix(J.getString("prix"));
+						beer2.setPourcentAlcool(J.getString("pourcentAlcool"));
+						beer2.setIdUpdate(J.getInt("idupdate"));
+						beer2.setIdServer(J.getString("_id"));
+						int res2=beer_dao.updateFromIdServer(beer2);
+						if(res2==0){
+							beer_dao.add(beer2);
+							System.out.println("[UpdateDaoThread][Run][43] On rajoute une biere");
+						}
+						else{
+							System.out.println("[UpdateDaoThread][Run][46] On update " + res2 + " biere");
+						}
 					}
 				}
 				MainActivity.isSynchronisedWithServer = true;
