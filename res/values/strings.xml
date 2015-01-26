@@ -8,5 +8,8 @@
     <string name="apiKey">AIzaSyAXnCUsDU3FFH2oPMQzXLW3qT04DbH6Qe0</string>
     <string name="splash_description">Splashscreen</string>
     <string name="textSplashScreen">myBeer</string>
+    <color name="coolGray">#3A424D</color>
+    <color name="White">#FFFFFF</color>
+    <color name="vertCool">#59B477</color>
 
 </resources>

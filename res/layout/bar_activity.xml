@@ -4,59 +4,51 @@
     android:layout_height="match_parent"
     android:orientation="vertical" >
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical" >
-
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" >
-             <ImageView
-                android:id="@+id/img"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/ic_launcher" />
-
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:orientation="vertical" >
+            android:layout_height="70dp"
+            android:background="@color/coolGray"
+            android:orientation="vertical">
 
                 <TextView
                     android:id="@+id/nameBar"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:gravity="center_horizontal"
+                    android:layout_marginTop="10dp"
                     android:text="Bar"
                     android:textAppearance="?android:attr/textAppearanceLarge"
-                    android:textColor="#339966"
+                    android:textColor="@color/White"
                     android:textStyle="bold" />
-                
-                 <TextView
-                     android:id="@+id/adress"
-                     android:layout_width="match_parent"
-                     android:layout_height="wrap_content"
-                     android:text="Adresse"
-                     android:textColor="#000000" />
 
-            </LinearLayout>
+                <TextView
+                    android:id="@+id/adress"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center_horizontal|bottom"
+                    android:text="Adresse"
+                    android:textColor="@color/White" />
 
         </LinearLayout>
 
         <ListView
             android:id="@android:id/list"
             android:layout_width="match_parent"
-            android:layout_height="422dp"
+            android:layout_height="match_parent"
+            android:layout_gravity="center_horizontal"
+            android:layout_weight="5"
             android:clickable="true" >
         </ListView>
 
         <Button
             android:id="@+id/addBeer"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="50dp"
+            android:onClick="addNewBeer"
             android:text="Ajouter une bière"
-            android:onClick="addNewBeer" />
-
-    </LinearLayout>
+            android:gravity="center_horizontal|center_vertical"
+            android:background="@color/vertCool"
+            android:textColor="@color/White"
+            android:textAllCaps="true" />
 
 </LinearLayout>

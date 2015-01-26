@@ -60,11 +60,11 @@ public class BarArrayAdapter extends BaseAdapter{
 	        title = (TextView) row.findViewById(R.id.title);
 	        type = (TextView) row.findViewById(R.id.type);
 	        prix = (TextView) row.findViewById(R.id.prix);
-	        i1=(ImageView)row.findViewById(R.id.img);
+	        //i1=(ImageView)row.findViewById(R.id.img);
 	        title.setText(this.title[position]);
 	        type.setText(this.type[position]);
 	        prix.setText(this.prix[position]);
-	        i1.setImageResource(this.img[position]);
+	        //i1.setImageResource(this.img[position]);
 
 	        return (row);
 	}

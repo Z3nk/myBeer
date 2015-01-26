@@ -14,7 +14,7 @@ import com.google.android.gms.maps.model.LatLng;
 
 public class MyBeerServer {
 
-	public static final String BEER_ADRESSE = "http://192.168.0.11:3000";
+	public static final String BEER_ADRESSE = "http://192.168.1.24:3000";
 
 	/*
 	 * Partie des bars
