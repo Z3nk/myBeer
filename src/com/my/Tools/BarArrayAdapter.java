@@ -21,12 +21,14 @@ import android.widget.TextView;
 
 public class BarArrayAdapter extends BaseAdapter{
 	String[] title, type, prix;
+	Long[] ids;
     int[] img;
     Context context;
 
 	public BarArrayAdapter(String[] title, String[] type, String[] prix,
-			int[] img, Context context) {
+			int[] img, Long[] ids, Context context) {
 		super();
+		this.ids=ids;
 		this.title = title;
 		this.type = type;
 		this.prix = prix;
@@ -47,7 +49,7 @@ public class BarArrayAdapter extends BaseAdapter{
 	@Override
 	public long getItemId(int position) {
 		// TODO Auto-generated method stub
-		return position;
+		return ids[position];
 	}
 
 	@Override

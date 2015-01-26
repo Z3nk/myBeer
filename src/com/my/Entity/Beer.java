@@ -8,12 +8,14 @@ public class Beer {
 	private String name;
 	private String type;
 	private String prix;
+	private String fiche;
 	private String pourcentAlcool;
 	private int idUpdate;
 	private String idServer;
 	
 	public Beer(){
 		this.idUpdate=0;
+		this.fiche="";
 	}
 	public long getId() {
 		return id;
@@ -64,6 +66,12 @@ public class Beer {
 	@Override
 	public String toString(){
 		return "{\"id\":"+id+",\"name\":\""+name+"\",\"type\":\""+type+"\",\"prix\":\""+prix+"\",\"pourcentAlcool\":\""+pourcentAlcool+"\",\"idupdate\":\""+idUpdate+"\"}";
+	}
+	public String getFiche() {
+		return fiche;
+	}
+	public void setFiche(String fiche) {
+		this.fiche = fiche;
 	}
 	
 }

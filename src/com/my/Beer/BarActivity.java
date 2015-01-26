@@ -55,7 +55,7 @@ public class BarActivity extends ListActivity {
         	 public void onItemClick(AdapterView<?> parent, View view, int position, long id){
         		 Beer b=beers.get(position);
         		 Intent i = new Intent(BarActivity.this.getApplicationContext(), BeerActivity.class);
-        		 i.putExtra("id", bar.getId());
+        		 i.putExtra("id", b.getIdServer());
         		 startActivity(i);
         		 
         	 }
@@ -73,10 +73,12 @@ public class BarActivity extends ListActivity {
 			String[] noms = new String[tab.length];
 		    String[] prix = new String[tab.length];
 		    String[] type = new String[tab.length];
+		    Long[] ids= new Long[tab.length];
 		    int[] img=new int[tab.length];
 			for(int i=0;i<tab.length && tab[i] != "";i++)
 			{
 				beers.add(beer_DAO.getBeer(tab[i]));
+				ids[i]=beers.get(i).getId();
 				noms[i]=beers.get(i).getName();
 				prix[i]=beers.get(i).getPrix();
 				type[i]=beers.get(i).getType();
@@ -91,7 +93,7 @@ public class BarActivity extends ListActivity {
 	         * On définit comment on veut que les éléments s'affichent
 	         */
 	        if(tab[0] != "")
-	        	setListAdapter(new BarArrayAdapter(noms,prix,type,img, this));
+	        	setListAdapter(new BarArrayAdapter(noms,prix,type,img,ids, this));
 		}
 		// sinon on peut ajouter un bar
 		else {

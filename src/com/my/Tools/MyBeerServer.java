@@ -151,7 +151,7 @@ public class MyBeerServer {
 		return "[MyBeerServer][addBeer][Erreur]";
 	}
 	
-	public static String updateBeer(String idServer) throws IOException {
+	public static String getBeer(String idServer) throws IOException {
 		URL url = new URL(BEER_ADRESSE + "/beers/"+idServer);
 		HttpURLConnection conn = (HttpURLConnection) url.openConnection();
 		conn.setRequestMethod("GET");

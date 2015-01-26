@@ -12,11 +12,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content" >
-             <ImageView
-                android:id="@+id/img"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/ic_launcher" />
+           
 
             <LinearLayout
                 android:layout_width="wrap_content"
@@ -50,21 +46,19 @@
         android:layout_height="wrap_content"
         android:layout_gravity="fill_vertical|fill_horizontal" >
 
-        <TextView
+        <Button
             android:id="@+id/fiche"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:text="Fiche"
-            android:textAppearance="?android:attr/textAppearanceMedium" />
+            android:hint="Fiche"
+            android:onClick="fiche"/>
 
-        <TextView
+        <Button
             android:id="@+id/avis"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:text="Avis"
-            android:textAppearance="?android:attr/textAppearanceMedium" />
+            android:hint="Avis"
+            android:onClick="avis"/>
 
     </LinearLayout>
 
