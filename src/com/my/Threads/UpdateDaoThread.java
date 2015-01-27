@@ -52,7 +52,7 @@ public class UpdateDaoThread extends Thread {
 					
 					String[] tab2;
 					tab2=b2.getBeers().split(";");
-					for(int y=0;y<tab2.length;y++){
+					for(int y=0;y<tab2.length && tab2[y] != "";y++){
 						String s=MyBeerServer.getBeer(tab2[y]);
 						JSONObject J=new JSONObject(s);
 						Beer beer2=new Beer();
