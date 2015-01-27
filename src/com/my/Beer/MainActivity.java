@@ -168,7 +168,7 @@ public class MainActivity extends FragmentActivity implements
 		if(Bars!=null)
 			for(Bar b:Bars)
 				GoogleMapTools.addMarker(googleMap,
-		new MarkerOptions().position(b.getPos()).title(b.getName()).snippet(String.valueOf(b.getBeers().split(";").length)+" bieres"));
+		new MarkerOptions().position(b.getPos()).title(b.getName()).snippet(GoogleMapTools.getNbBeers(b.getBeers())+" bieres"));
 		
 	}
 
@@ -200,7 +200,7 @@ public class MainActivity extends FragmentActivity implements
 			List<Bar> Bars=MainController.GetAllBarsFromMe(DAO,latLng);
 			if(Bars!=null)
 				for(Bar b:Bars)
-					GoogleMapTools.addMarker(googleMap, new MarkerOptions().position(b.getPos()).title(b.getName()).snippet(String.valueOf(b.getBeers().split(";").length - 1)+" bi�res"));
+					GoogleMapTools.addMarker(googleMap, new MarkerOptions().position(b.getPos()).title(b.getName()).snippet(GoogleMapTools.getNbBeers(b.getBeers())+" bieres"));
 			if(isJustSynchroniseNeedToAddMarker){
 				isSynchroniseWithServerDisplay=true;
 				isJustSynchroniseNeedToAddMarker=false;

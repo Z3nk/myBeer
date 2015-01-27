@@ -16,7 +16,7 @@ import android.widget.EditText;
 
 public class AddBeerActivity extends Activity  {
 	
-	private EditText nom, type, prix, pourcentALcool;
+	private EditText nom, type, prix, pourcentALcool, fiche;
 	private Button enregistrer, modifier, supprimer;
 	private Beer beer;
 	private Beer_DAO DAO;
@@ -35,6 +35,7 @@ public class AddBeerActivity extends Activity  {
 		nom = (EditText) findViewById(R.id.nom);
 		type= (EditText) findViewById(R.id.type);
 		prix = (EditText) findViewById(R.id.prix);
+		fiche = (EditText) findViewById(R.id.Fiche);
 		pourcentALcool = (EditText) findViewById(R.id.pourcentAlcol);
 		enregistrer = (Button) findViewById(R.id.enregistrer);
 		modifier = (Button) findViewById(R.id.modifier);
@@ -66,9 +67,10 @@ public class AddBeerActivity extends Activity  {
 	
 	public void enregistrer(View vue) {
 		beer.setName(nom.getText().toString());
-		beer.setType(nom.getText().toString());
-		beer.setPrix(nom.getText().toString());
-		beer.setPourcentAlcool(nom.getText().toString());
+		beer.setType(type.getText().toString());
+		beer.setPrix(prix.getText().toString());
+		beer.setFiche(fiche.getText().toString());
+		beer.setPourcentAlcool(pourcentALcool.getText().toString());
 		BeerController.addBeer(DAO, beer,idBar,DAO_Bar);
 		finish();
 	}

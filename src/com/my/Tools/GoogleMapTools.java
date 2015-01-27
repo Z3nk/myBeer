@@ -37,4 +37,12 @@ public class GoogleMapTools {
 	public static String fromLatLng(LatLng pos) {
 		return "["+pos.longitude+","+pos.latitude+"]";
 	}
+	public static String getNbBeers(String valueOf) {
+		String[] tab2=valueOf.split(";");
+		int i=0;
+		for(int y=0;y<tab2.length && tab2[y] != "";y++){
+			i++;
+		}
+		return Integer.toString(i);
+	}
 }

@@ -35,8 +35,9 @@ public class Beer_DAO {
 	            b.setType(curseur.getString(2));
 	            b.setPrix(curseur.getString(3));
 	            b.setPourcentAlcool(curseur.getString(4));
-	            b.setIdUpdate(curseur.getInt(5));
-	            b.setIdServer(curseur.getString(6));
+	            b.setFiche(curseur.getString(5));
+	            b.setIdUpdate(curseur.getInt(6));
+	            b.setIdServer(curseur.getString(7));
 		        curseur.close();
 		        return b;
 		}
@@ -47,6 +48,7 @@ public class Beer_DAO {
 		     valeurs.put("type", b.getType());
 		     valeurs.put("prix", b.getPrix());
 		     valeurs.put("pourcentAlcool", b.getPourcentAlcool());
+		     valeurs.put("fiche", b.getFiche());
 		     valeurs.put("idUpdate", b.getIdUpdate());
 		     valeurs.put("idServer", b.getIdServer());
 		     return bd.insert("beer", null, valeurs);
@@ -59,6 +61,7 @@ public class Beer_DAO {
 		      valeurs.put("type", b.getType());
 		      valeurs.put("prix", b.getPrix());
 		      valeurs.put("pourcentAlcool", b.getPourcentAlcool());
+		      valeurs.put("fiche", b.getFiche());
 		      valeurs.put("idUpdate", b.getIdUpdate());
 		      valeurs.put("idServer", b.getIdServer());
 		     bd.update("beer", valeurs, "id = "+b.getId(), null);
@@ -70,7 +73,9 @@ public class Beer_DAO {
 			  valeurs.put("name", b.getName());
 		      valeurs.put("type", b.getType());
 		      valeurs.put("prix", b.getPrix());
+		      valeurs.put("fiche", b.getFiche());
 		      valeurs.put("pourcentAlcool", b.getPourcentAlcool());
+		      valeurs.put("fiche", b.getFiche());
 		      valeurs.put("idUpdate", b.getIdUpdate());
 		      valeurs.put("idServer", b.getIdServer());
 		     return bd.update("beer", valeurs, "idServer = ? ", new String[] { b.getIdServer()});// AND idUpdate != ? , Integer.toString(bar.getIdUpdate())
@@ -93,8 +98,9 @@ public class Beer_DAO {
 		            b.setType(curseur.getString(2));
 		            b.setPrix(curseur.getString(3));
 		            b.setPourcentAlcool(curseur.getString(4));
-		            b.setIdUpdate(curseur.getInt(5));
-		            b.setIdServer(curseur.getString(6));
+		            b.setFiche(curseur.getString(5));
+		            b.setIdUpdate(curseur.getInt(6));
+		            b.setIdServer(curseur.getString(7));
 		            liste.add(b);
 		        }
 		        while (curseur.moveToNext());

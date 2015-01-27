@@ -20,6 +20,8 @@ public class GetAvisBeerThread extends Thread {
 	}
 
 	public void run(){
-		content.setText("toto");
+		synchronized(content) {
+			content.setText("toto");
+		}
     }
   }

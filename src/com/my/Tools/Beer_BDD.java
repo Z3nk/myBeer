@@ -18,6 +18,7 @@ public class Beer_BDD extends SQLiteOpenHelper{
 				+ "type Text NOT NULL,"
 				+ "prix TEXT NOT NULL,"
 				+ "pourcentAlcool TEXT NOT NULL,"
+				+ "fiche TEXT NOT NULL,"
 				+ "idUpdate INTEGER,"
 				+ "idServer TEXT NOT NULL);");
 	}

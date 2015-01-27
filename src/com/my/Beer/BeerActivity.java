@@ -14,9 +14,11 @@ import android.widget.TextView;
 
 public class BeerActivity extends Activity {
 
+	private TextView nom, prix;
 	private Beer beer;
 	private Beer_DAO DAO;
 	private TextView content;
+	private Button fiche, avis;
 	@Override
 	public void onCreate(Bundle bundle) {
 		super.onCreate(bundle);
@@ -24,6 +26,11 @@ public class BeerActivity extends Activity {
 		DAO=new Beer_DAO();
 		DAO.ouverture(this);
 		content = (TextView) findViewById(R.id.content);
+		nom = (TextView) findViewById(R.id.nameBeer);
+		prix= (TextView) findViewById(R.id.price);
+		fiche = (Button) findViewById(R.id.fiche);
+		avis = (Button) findViewById(R.id.avis);
+		
 	}
 
 	@Override
@@ -32,6 +39,11 @@ public class BeerActivity extends Activity {
 		Bundle donnees = getIntent().getExtras();
 		if (donnees.getString("id") != "-1") {
 			beer = DAO.getBeer(donnees.getString("id"));
+			nom.setText(beer.getName());
+			prix.setText(beer.getPrix());
+			content.setText(beer.getFiche());
+			fiche.setEnabled(false);
+			avis.setEnabled(true);
 		}
 		else {
 		
@@ -39,13 +51,19 @@ public class BeerActivity extends Activity {
 	}
 	
 	public void fiche(View vue) {
-		content.setText(beer.getFiche());
+		synchronized(content) {
+			content.setText(beer.getFiche());
+		}
+		avis.setEnabled(true);
+		fiche.setEnabled(false);
 	}
 	
 	public void avis(View vue) {
 		content.setText("");
 		GetAvisBeerThread threadGetAvis = new GetAvisBeerThread(DAO,beer,content);
 		threadGetAvis.start();
+		avis.setEnabled(false);
+		fiche.setEnabled(true);
 	}
 	@Override
 	protected void onDestroy() {
