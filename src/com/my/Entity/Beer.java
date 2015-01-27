@@ -65,7 +65,7 @@ public class Beer {
 	
 	@Override
 	public String toString(){
-		return "{\"id\":"+id+",\"name\":\""+name+"\",\"type\":\""+type+"\",\"prix\":\""+prix+"\",\"pourcentAlcool\":\""+pourcentAlcool+"\",\"idupdate\":\""+idUpdate+"\"}";
+		return "{\"id\":"+id+",\"name\":\""+name+"\",\"type\":\""+type+"\",\"prix\":\""+prix+"\",\"pourcentAlcool\":\""+pourcentAlcool+"\",\"fiche\":\""+fiche+"\",\"idupdate\":\""+idUpdate+"\"}";
 	}
 	public String getFiche() {
 		return fiche;
