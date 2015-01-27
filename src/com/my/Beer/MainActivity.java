@@ -23,6 +23,7 @@ import com.google.android.gms.maps.GoogleMap.OnInfoWindowClickListener;
 import com.google.android.gms.maps.GoogleMap.OnMapLongClickListener;
 import com.google.android.gms.maps.GoogleMap.OnMarkerClickListener;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
@@ -165,10 +166,16 @@ public class MainActivity extends FragmentActivity implements
 		lm.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 10000, 0, this);
 		
 		List<Bar> Bars=MainController.GetAllBarsFromMe(DAO,lastPosition);
-		if(Bars!=null)
-			for(Bar b:Bars)
-				GoogleMapTools.addMarker(googleMap,
-		new MarkerOptions().position(b.getPos()).title(b.getName()).snippet(GoogleMapTools.getNbBeers(b.getBeers())+" bieres"));
+		GoogleMapTools.displayMarkerOnMap(Bars,googleMap);
+		/*if(Bars!=null)
+			for(Bar b:Bars){
+				MarkerOptions M=new MarkerOptions();
+				M.position(b.getPos());
+				M.title(b.getName());
+				M.snippet(GoogleMapTools.getNbBeers(b.getBeers())+" bieres");
+				M.icon(BitmapDescriptorFactory.fromPath("http://maps.gstatic.com/mapfiles/place_api/icons/travel_agent-71.png"));
+				GoogleMapTools.addMarker(googleMap,M);
+			}*/
 		
 	}
 
@@ -198,9 +205,7 @@ public class MainActivity extends FragmentActivity implements
 			// Zoom in the Google Map
 			googleMap.animateCamera(CameraUpdateFactory.zoomTo(15));
 			List<Bar> Bars=MainController.GetAllBarsFromMe(DAO,latLng);
-			if(Bars!=null)
-				for(Bar b:Bars)
-					GoogleMapTools.addMarker(googleMap, new MarkerOptions().position(b.getPos()).title(b.getName()).snippet(GoogleMapTools.getNbBeers(b.getBeers())+" bieres"));
+			GoogleMapTools.displayMarkerOnMap(Bars,googleMap);
 			if(isJustSynchroniseNeedToAddMarker){
 				isSynchroniseWithServerDisplay=true;
 				isJustSynchroniseNeedToAddMarker=false;

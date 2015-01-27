@@ -42,8 +42,6 @@ public class BeerActivity extends Activity {
 			nom.setText(beer.getName());
 			prix.setText(beer.getPrix());
 			content.setText(beer.getFiche());
-			fiche.setEnabled(false);
-			avis.setEnabled(true);
 		}
 		else {
 		
@@ -51,19 +49,19 @@ public class BeerActivity extends Activity {
 	}
 	
 	public void fiche(View vue) {
+		try{
 		synchronized(content) {
 			content.setText(beer.getFiche());
 		}
-		avis.setEnabled(true);
-		fiche.setEnabled(false);
+		}catch(Exception e){
+			
+		}
 	}
 	
 	public void avis(View vue) {
 		content.setText("");
 		GetAvisBeerThread threadGetAvis = new GetAvisBeerThread(DAO,beer,content);
 		threadGetAvis.start();
-		avis.setEnabled(false);
-		fiche.setEnabled(true);
 	}
 	@Override
 	protected void onDestroy() {

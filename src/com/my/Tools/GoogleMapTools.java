@@ -4,9 +4,15 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+import android.graphics.Bitmap;
+
 import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.model.BitmapDescriptor;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.my.Beer.R;
+import com.my.Entity.Bar;
 
 public class GoogleMapTools {
 	private static final double PI = Math.PI;
@@ -44,5 +50,18 @@ public class GoogleMapTools {
 			i++;
 		}
 		return Integer.toString(i);
+	}
+	
+	public static void displayMarkerOnMap(List<Bar> Bars, GoogleMap googleMap){
+		if(Bars!=null)
+			for(Bar b:Bars){
+				MarkerOptions M=new MarkerOptions();
+				M.position(b.getPos());
+				M.title(b.getName());
+				M.snippet(GoogleMapTools.getNbBeers(b.getBeers())+" bieres");
+				BitmapDescriptor bitmap = BitmapDescriptorFactory.fromResource(R.drawable.beericonmap);
+				M.icon(bitmap);
+				GoogleMapTools.addMarker(googleMap,M);
+			}
 	}
 }
