@@ -65,6 +65,7 @@ public class BeerActivity extends Activity {
 	}
 	@Override
 	protected void onDestroy() {
+		DAO.fermeture();
 		super.onDestroy();
 	}
 

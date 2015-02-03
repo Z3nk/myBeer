@@ -23,5 +23,6 @@ public class AddBarThread extends Thread {
 			System.out.println("[AddBarThread][Run][23] Erreur base de donnée externe : " + e.toString());
 		}
        dAO.add(b);
+       dAO.fermeture();
     }
   }

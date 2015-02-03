@@ -23,6 +23,7 @@ public class BarController {
 			System.out.println("[BarController][updateBar][23] Erreur base de donnée externe : " + e.toString());
 		}
 		DAO.update(b);
+		DAO.fermeture();
 		return true;
 	}
 }

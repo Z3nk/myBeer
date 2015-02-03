@@ -38,6 +38,10 @@ public class AddBeerThread extends Thread{
 	} catch (IOException e) {
 		System.out.println("[AddBeerThread][Run][39] Erreur update bar avec le serveur externe");
 		e.printStackTrace();
+	}finally{
+		dAO.fermeture();
+		daoBar.fermeture();
+		
 	}
        
     }
