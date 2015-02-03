@@ -11,6 +11,7 @@ import android.widget.EditText;
 import com.google.android.gms.maps.model.LatLng;
 import com.my.Controllers.BarController;
 import com.my.Entity.Bar;
+import com.my.Threads.AddBarAutoCompleteAdressThread;
 import com.my.Tools.Bar_DAO;
 import com.my.Tools.MyBeerServer;
 
@@ -49,6 +50,9 @@ public class AddBarActivity extends Activity {
 		}
 		// sinon on peut ajouter un bar
 		else {
+			
+//			runOnUiThread(new AddBarAutoCompleteAdressThread(bar,nom,adresse));
+			new AddBarAutoCompleteAdressThread(bar,nom,adresse,this).start();
 			enregistrer.setEnabled(true);
 			modifier.setEnabled(false);
 			supprimer.setEnabled(false);

@@ -77,5 +77,6 @@
 	        android:text="Small Text"
 	        android:textAppearance="?android:attr/textAppearanceSmall"
 	        android:padding="10dp" />
+
 	</LinearLayout>
 </LinearLayout>

@@ -1,5 +1,6 @@
 package com.my.Beer;
 
+import java.util.HashMap;
 import java.util.List;
 
 import android.app.Application;
@@ -159,6 +160,7 @@ public class MainActivity extends FragmentActivity implements
 	protected void onResume() {
 		super.onResume();
 		initilizeMap();
+		GoogleMapTools.listMarker=new HashMap<LatLng, MarkerOptions>();
 		// on reinitialise la map lorsque l'on resume l'appli
 		lm = (LocationManager) this.getSystemService(LOCATION_SERVICE);
 		if (lm.isProviderEnabled(LocationManager.GPS_PROVIDER))

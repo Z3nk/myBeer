@@ -17,7 +17,7 @@ import com.my.Entity.Bar;
 public class GoogleMapTools {
 	private static final double PI = Math.PI;
 	private static final double RADIO = 6378.16;
-	private static HashMap<LatLng, MarkerOptions> listMarker=new HashMap<LatLng, MarkerOptions>();
+	public static HashMap<LatLng, MarkerOptions> listMarker=new HashMap<LatLng, MarkerOptions>();
 	
 	public static double Radians(double x)
     {

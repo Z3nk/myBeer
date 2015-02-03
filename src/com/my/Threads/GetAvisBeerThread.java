@@ -21,7 +21,11 @@ public class GetAvisBeerThread extends Thread {
 
 	public void run(){
 		synchronized(content) {
-			content.setText("toto");
+			try{
+				content.setText("toto");
+			}catch(Exception e){
+				
+			}
 		}
     }
   }
