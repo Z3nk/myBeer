@@ -9,9 +9,8 @@ import com.my.Tools.MyBeerServer;
 
 public class BarController {
 
-	public static boolean addBar(Bar_DAO DAO, Bar b)
-	{
-		new AddBarThread(DAO,b).start();
+	public static boolean addBar(Bar_DAO DAO, Bar b) {
+		new AddBarThread(DAO, b).start();
 		return true;
 	}
 
@@ -20,7 +19,7 @@ public class BarController {
 		try {
 			MyBeerServer.updateBar(b);
 		} catch (IOException e) {
-			System.out.println("[BarController][updateBar][23] Erreur base de donnée externe : " + e.toString());
+			//System.out.println("[BarController][updateBar][23] Erreur base de donnÃ©e externe : "+ e.toString());
 		}
 		DAO.update(b);
 		DAO.fermeture();

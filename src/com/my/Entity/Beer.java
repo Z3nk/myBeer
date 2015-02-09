@@ -1,7 +1,7 @@
 package com.my.Entity;
 
-import com.google.android.gms.maps.model.LatLng;
-import com.my.Tools.GoogleMapTools;
+//import com.google.android.gms.maps.model.LatLng;
+//import com.my.Tools.GoogleMapTools;
 
 public class Beer {
 	private long id;

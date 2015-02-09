@@ -14,12 +14,11 @@
                     android:id="@+id/nameBeer"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Beer"
+                    android:text="@string/biere"
                     android:textAppearance="?android:attr/textAppearanceLarge"
                     android:textColor="@color/White"
                     android:textStyle="bold"
                     android:gravity="center_horizontal"
-                    android:textAllCaps="true"
                     android:layout_weight="1"
                     android:layout_marginTop="4dp"/>
                 
@@ -27,7 +26,7 @@
                      android:id="@+id/price"
                      android:layout_width="match_parent"
                      android:layout_height="wrap_content"
-                     android:text="Prix"
+                     android:text="@string/prix"
                      android:textColor="@color/White"
                      android:gravity="center_horizontal|bottom"
                      android:layout_weight="1"
@@ -50,7 +49,7 @@
             android:background="@color/jauneCool"
             android:gravity="center_horizontal|center_vertical"
             android:textColor="@color/coolGray"
-            android:hint="Fiche"
+            android:hint="@string/fiche"
             android:onClick="fiche"/>
 
         <Button
@@ -61,7 +60,7 @@
             android:background="@color/jauneCool"
             android:gravity="center_horizontal|center_vertical"
             android:textColor="@color/coolGray"
-            android:hint="Avis"
+            android:hint="@string/avis"
             android:onClick="avis"/>
 
     </LinearLayout>
@@ -74,7 +73,7 @@
 	        android:id="@+id/content"
 	        android:layout_width="match_parent"
 	        android:layout_height="match_parent"
-	        android:text="Small Text"
+	        android:text="@string/smallText"
 	        android:textAppearance="?android:attr/textAppearanceSmall"
 	        android:padding="10dp" />
 

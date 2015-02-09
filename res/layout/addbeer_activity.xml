@@ -10,20 +10,20 @@
         android:layout_height="60dp"
         android:background="@color/coolGray"
         android:gravity="center_horizontal|center_vertical"
-        android:text="Ajouter une bière"
+        android:text="@string/ajouterUneBiere"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:textColor="@color/White"
         android:textStyle="bold" />
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="0dp"
         android:layout_weight="5"
         android:orientation="vertical" >
 
         <EditText
             android:id="@+id/nom"
-            android:hint="Nom ?"
+            android:hint="@string/nomQuestion"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="10dp"
@@ -35,7 +35,7 @@
 
         <EditText
             android:id="@+id/type"
-            android:hint="Type ?"
+            android:hint="@string/typeQuestion"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="10dp"
@@ -47,7 +47,7 @@
 
         <EditText
             android:id="@+id/prix"
-            android:hint="Prix ?"
+            android:hint="@string/prixQuestion"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="10dp"
@@ -59,7 +59,7 @@
 
         <EditText
             android:id="@+id/pourcentAlcol"
-            android:hint="% Alcool ?"
+            android:hint="@string/degreeAlcoolQuestion"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="10dp"
@@ -78,7 +78,7 @@
             android:background="@drawable/addinput"
             android:ems="10"
             android:gravity="center_horizontal"
-            android:hint="Rajoutez une fiche"
+            android:hint="@string/ajouterUneFiche"
             android:padding="3dp"
             android:textColor="@color/coolGray" />
 
@@ -92,36 +92,15 @@
 
         <Button
             android:id="@+id/enregistrer"
-            android:text="Enregistrer"
+            android:text="@string/enregistrer"
             android:onClick="enregistrer"
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="50dp"
             android:layout_weight="1"
             android:background="@color/vertCool"
             android:gravity="center_horizontal|center_vertical"
             android:textColor="@color/White"/>
 
-        <Button
-            android:id="@+id/modifier"
-            android:text="Modifier"
-            android:onClick="modifier"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:layout_weight="1"
-            android:background="@color/vertCool"
-            android:gravity="center_horizontal|center_vertical"
-            android:textColor="@color/White"/>
-
-        <Button
-            android:id="@+id/supprimer"
-            android:text="Supprimer"
-            android:onClick="supprimer"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:layout_weight="1"
-            android:background="@color/vertCool"
-            android:gravity="center_horizontal|center_vertical"
-            android:textColor="@color/White"/>
     </LinearLayout>
 
 </LinearLayout>

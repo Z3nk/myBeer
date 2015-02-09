@@ -8,21 +8,23 @@ public class AddBarThread extends Thread {
 
 	Bar_DAO dAO;
 	Bar b;
-    public AddBarThread(Bar_DAO dAO, Bar b) {
-		this.dAO=dAO;
-		this.b=b;
+
+	public AddBarThread(Bar_DAO dAO, Bar b) {
+		this.dAO = dAO;
+		this.b = b;
 	}
 
-	public void run(){
-       System.out.println("AddBarThread running");
-       try {
+	public void run() {
+		System.out.println("AddBarThread running");
+		try {
 			String _idInServerBase = MyBeerServer.addBar(b);
-			System.out.println("[AddBarThread][Run][20] On a ajouter un bar avec un idserveur :"+_idInServerBase);
+			// System.out.println("[AddBarThread][Run][20] On a ajouter un bar avec un idserveur :"+_idInServerBase);
 			b.setIdServer(_idInServerBase);
 		} catch (Exception e) {
-			System.out.println("[AddBarThread][Run][23] Erreur base de donnée externe : " + e.toString());
+			// System.out.println("[AddBarThread][Run][23] Erreur base de donnÃ©e externe : "
+			// + e.toString());
 		}
-       dAO.add(b);
-       dAO.fermeture();
-    }
-  }
+		dAO.add(b);
+		dAO.fermeture();
+	}
+}

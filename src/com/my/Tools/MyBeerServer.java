@@ -5,7 +5,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
+//import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.List;
 
@@ -14,7 +14,7 @@ import com.google.android.gms.maps.model.LatLng;
 
 public class MyBeerServer {
 
-	public static final String BEER_ADRESSE = "http://172.19.139.143:3000";
+	public static final String BEER_ADRESSE = "http://192.168.1.24:3000";
 
 	/*
 	 * Partie des bars
@@ -104,7 +104,9 @@ public class MyBeerServer {
 		BufferedReader br = new BufferedReader(new InputStreamReader(
 				(conn.getInputStream())));
 
+		@SuppressWarnings("unused")
 		String output;
+		
 		System.out.println("[MyBeerServer][updateBar][103] .... \n");
 		while ((output = br.readLine()) != null) {
 		}
@@ -167,7 +169,7 @@ public class MyBeerServer {
 
 		String yolo = "";
 		String output;
-		System.out.println("[MyBeerServer][updateBeer][170] \n");
+		//System.out.println("[MyBeerServer][updateBeer][170] \n");
 		while ((output = br.readLine()) != null) {
 			yolo += output;
 		}

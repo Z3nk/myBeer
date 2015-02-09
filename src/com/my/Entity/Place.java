@@ -7,5 +7,4 @@ public class Place {
 	public String icon;
 	public String formatted_phone_number;
 	public String formatted_address;
-
 }

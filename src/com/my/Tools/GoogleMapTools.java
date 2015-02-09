@@ -1,10 +1,10 @@
 package com.my.Tools;
 
-import java.util.ArrayList;
+//import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-import android.graphics.Bitmap;
+//import android.graphics.Bitmap;
 
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.model.BitmapDescriptor;
