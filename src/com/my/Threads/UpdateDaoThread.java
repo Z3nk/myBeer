@@ -12,6 +12,8 @@ import org.json.JSONObject;
 //import android.graphics.Bitmap;
 //import android.graphics.BitmapFactory;
 
+import android.widget.Toast;
+
 import com.google.android.gms.maps.model.LatLng;
 import com.my.Beer.MainActivity;
 import com.my.Entity.Bar;
@@ -26,11 +28,13 @@ public class UpdateDaoThread extends Thread {
 	private Beer_DAO beer_dao;
 	private LatLng latlng;
 	public String tab;
+	private MainActivity activity;
 
-	public UpdateDaoThread(Bar_DAO dAO, Beer_DAO beer_dao, LatLng latlng) {
+	public UpdateDaoThread(Bar_DAO dAO, Beer_DAO beer_dao, LatLng latlng, MainActivity activity) {
 		this.dAO = dAO;
 		this.beer_dao = beer_dao;
 		this.latlng = latlng;
+		this.activity=activity;
 		tab = "not init yet";
 	}
 
@@ -84,6 +88,11 @@ public class UpdateDaoThread extends Thread {
 			}
 			MainActivity.isSynchronisedWithServer = true;
 		} catch (Exception e) {
+			activity.runOnUiThread(new Runnable() {
+			    public void run() {
+			        Toast.makeText(activity, "Impossible de se connecter au serveur", Toast.LENGTH_SHORT).show();
+			    }
+			});
 			e.printStackTrace();
 			// Afficher ici message erreur connexion avec le serveur à l
 			// utilisateur

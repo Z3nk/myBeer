@@ -193,7 +193,7 @@ public class MainActivity extends FragmentActivity implements LocationListener {
 				location.getLongitude());
 		boolean isJustSynchroniseNeedToAddMarker = false;
 		if (!isSynchronisedWithServer && !threadIsWorking) {
-			MainController.updateDAO(DAO, DAO_beer, latLng);
+			MainController.updateDAO(DAO, DAO_beer, latLng,this);
 			threadIsWorking = true;
 		} else {
 			if (isSynchroniseWithServerDisplay == false)

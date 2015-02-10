@@ -2,6 +2,7 @@ package com.my.Controllers;
 
 import java.io.IOException;
 
+import com.my.Beer.AddBarActivity;
 import com.my.Entity.Bar;
 import com.my.Threads.AddBarThread;
 import com.my.Tools.Bar_DAO;
@@ -9,8 +10,8 @@ import com.my.Tools.MyBeerServer;
 
 public class BarController {
 
-	public static boolean addBar(Bar_DAO DAO, Bar b) {
-		new AddBarThread(DAO, b).start();
+	public static boolean addBar(Bar_DAO DAO, Bar b, AddBarActivity activity) {
+		new AddBarThread(DAO, b, activity).start();
 		return true;
 	}
 

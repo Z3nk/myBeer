@@ -16,7 +16,7 @@
     <string name="degreeAlcoolQuestion">% Alcool ?</string>
     <string name="adresseQuestion">Adresse ?</string>
     <string name="ajouterUneBiere">Ajouter une bière</string>
-    <string name="ajouterUneFiche">Ajouter une fiche</string>
+    <string name="ajouterUneFiche">Vous en êtes le créateur, dites nous ce que vous en pensez !</string>
     <string name="ajouterUnBar">Ajouter un bar</string>
     <string name="bar">Bar</string>
     <string name="prix">Prix</string>

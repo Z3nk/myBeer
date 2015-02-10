@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.google.android.gms.maps.model.LatLng;
 import com.my.Controllers.BarController;
@@ -52,9 +53,20 @@ public class AddBarActivity extends Activity {
 	}
 
 	public void enregistrer(View vue) {
+		
+		if(nom.getText().toString().trim().equals("")){
+			Toast.makeText(getApplicationContext(), "Il vous faut indiquer un nom au bar", Toast.LENGTH_SHORT).show();
+			return;
+		}
+		
+		if(adresse.getText().toString().trim().equals("")){
+			Toast.makeText(getApplicationContext(), "Il vous faut indiquer une adresse au bar", Toast.LENGTH_SHORT).show();
+			return;
+		}
+			
 		bar.setName(nom.getText().toString());
 		bar.setAdress(adresse.getText().toString());
-		BarController.addBar(DAO, bar);
+		BarController.addBar(DAO, bar, this);
 		finish();
 	}
 

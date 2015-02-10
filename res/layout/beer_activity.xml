@@ -34,48 +34,72 @@
 
        </LinearLayout>
 
+     <LinearLayout
+         android:layout_width="match_parent"
+         android:layout_height="0dp"
+         android:layout_weight="5"
+         android:orientation="vertical" >
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="40dp"
-        android:layout_gravity="fill_vertical|fill_horizontal"
-        android:background="@color/jauneCool">
+         <TextView
+             android:id="@+id/nom"
+             android:layout_width="match_parent"
+             android:layout_height="wrap_content"
+             android:layout_marginBottom="10dp"
+             android:layout_marginTop="10dp"
+             android:background="@drawable/addinput"
+             android:gravity="center_horizontal"
+             android:hint="@string/nomQuestion"
+             android:padding="3dp"
+             android:textColor="@color/coolGray" />
 
-        <Button
-            android:id="@+id/fiche"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:background="@color/jauneCool"
-            android:gravity="center_horizontal|center_vertical"
-            android:textColor="@color/coolGray"
-            android:hint="@string/fiche"
-            android:onClick="fiche"/>
+         <TextView
+             android:id="@+id/type"
+             android:layout_width="match_parent"
+             android:layout_height="wrap_content"
+             android:layout_marginBottom="10dp"
+             android:layout_marginTop="10dp"
+             android:background="@drawable/addinput"
+             android:gravity="center_horizontal"
+             android:hint="@string/typeQuestion"
+             android:padding="3dp"
+             android:textColor="@color/coolGray" />
 
-        <Button
-            android:id="@+id/avis"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:background="@color/jauneCool"
-            android:gravity="center_horizontal|center_vertical"
-            android:textColor="@color/coolGray"
-            android:hint="@string/avis"
-            android:onClick="avis"/>
+         <TextView
+             android:id="@+id/prix"
+             android:layout_width="match_parent"
+             android:layout_height="wrap_content"
+             android:layout_marginBottom="10dp"
+             android:layout_marginTop="10dp"
+             android:background="@drawable/addinput"
+             android:gravity="center_horizontal"
+             android:hint="@string/prixQuestion"
+             android:padding="3dp"
+             android:textColor="@color/coolGray" />
 
-    </LinearLayout>
-    
-	<LinearLayout
-	    android:layout_width="match_parent"
-	    android:layout_height="match_parent">
+         <TextView
+             android:id="@+id/pourcentAlcol"
+             android:layout_width="match_parent"
+             android:layout_height="wrap_content"
+             android:layout_marginBottom="10dp"
+             android:layout_marginTop="10dp"
+             android:background="@drawable/addinput"
+             android:gravity="center_horizontal"
+             android:hint="@string/degreeAlcoolQuestion"
+             android:padding="3dp"
+             android:textColor="@color/coolGray" />
 
-	    <TextView
-	        android:id="@+id/content"
-	        android:layout_width="match_parent"
-	        android:layout_height="match_parent"
-	        android:text="@string/smallText"
-	        android:textAppearance="?android:attr/textAppearanceSmall"
-	        android:padding="10dp" />
+         <TextView
+             android:id="@+id/Fiche"
+             android:layout_width="match_parent"
+             android:layout_height="match_parent"
+             android:layout_marginBottom="10dp"
+             android:layout_marginTop="10dp"
+             android:background="@drawable/addinput"
+             android:ems="10"
+             android:gravity="center_horizontal"
+             android:hint="@string/ajouterUneFiche"
+             android:padding="3dp"
+             android:textColor="@color/coolGray" />
+     </LinearLayout>
 
-	</LinearLayout>
 </LinearLayout>

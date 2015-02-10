@@ -1,5 +1,8 @@
 package com.my.Threads;
 
+import android.widget.Toast;
+
+import com.my.Beer.AddBarActivity;
 import com.my.Entity.Bar;
 import com.my.Tools.Bar_DAO;
 import com.my.Tools.MyBeerServer;
@@ -8,10 +11,12 @@ public class AddBarThread extends Thread {
 
 	Bar_DAO dAO;
 	Bar b;
+	private AddBarActivity activity;
 
-	public AddBarThread(Bar_DAO dAO, Bar b) {
+	public AddBarThread(Bar_DAO dAO, Bar b, AddBarActivity activity) {
 		this.dAO = dAO;
 		this.b = b;
+		this.activity=activity;
 	}
 
 	public void run() {
@@ -24,7 +29,16 @@ public class AddBarThread extends Thread {
 			// System.out.println("[AddBarThread][Run][23] Erreur base de donnÃ©e externe : "
 			// + e.toString());
 		}
-		dAO.add(b);
+		if(b.getIdServer() != null){
+			dAO.add(b);
+		}
+		else{
+			activity.runOnUiThread(new Runnable() {
+			    public void run() {
+			        Toast.makeText(activity, "Impossible de rajouter un bar, nous n'avons pas accès au serveur ! :(", Toast.LENGTH_SHORT).show();
+			    }
+			});
+		}
 		dAO.fermeture();
 	}
 }

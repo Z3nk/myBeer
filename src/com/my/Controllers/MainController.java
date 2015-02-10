@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.google.android.gms.maps.model.LatLng;
+import com.my.Beer.MainActivity;
 import com.my.Entity.Bar;
 import com.my.Threads.UpdateDaoBeerThread;
 import com.my.Threads.UpdateDaoThread;
@@ -11,8 +12,8 @@ import com.my.Tools.Bar_DAO;
 import com.my.Tools.Beer_DAO;
 
 public class MainController {
-	public static void updateDAO(Bar_DAO DAO, Beer_DAO beer_dao, LatLng latlng) {
-		new UpdateDaoThread(DAO, beer_dao, latlng).start();
+	public static void updateDAO(Bar_DAO DAO, Beer_DAO beer_dao, LatLng latlng, MainActivity activity) {
+		new UpdateDaoThread(DAO, beer_dao, latlng,activity).start();
 	}
 
 	public static void updateBeerDAO(Beer_DAO DAO, LatLng latlng) {

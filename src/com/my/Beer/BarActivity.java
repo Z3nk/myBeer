@@ -73,7 +73,7 @@ public class BarActivity extends ListActivity {
 			String[] type = new String[tab.length];
 			Long[] ids = new Long[tab.length];
 			int[] img = new int[tab.length];
-			for (int i = 0; i < tab.length && tab[i] != ""; i++) {
+			for (int i = 0; i < tab.length && tab[i] != "" && beer_DAO.getBeer(tab[i]) != null; i++) {
 				beers.add(beer_DAO.getBeer(tab[i]));
 				ids[i] = beers.get(i).getId();
 				noms[i] = beers.get(i).getName();

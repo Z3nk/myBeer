@@ -30,6 +30,7 @@ public class AddBarAutoCompleteAdressThread extends Thread {
 		p = new Place();
 		ArrayList<Place> list = PlacesService.search(b.getPos().latitude,
 				b.getPos().longitude, 5);
+		try{
 		if (list.size() > 0) {
 			p = PlacesService.details(list.get(0).reference);
 
@@ -41,6 +42,9 @@ public class AddBarAutoCompleteAdressThread extends Thread {
 					adresse.setText(p.formatted_address);
 				}
 			});
+		}
+		}catch(Exception e){
+			// Erreur reseau, mais déjà affiché dans addbar
 		}
 	}
 }

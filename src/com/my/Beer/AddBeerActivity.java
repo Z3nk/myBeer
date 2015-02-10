@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 public class AddBeerActivity extends Activity {
 
@@ -56,12 +57,34 @@ public class AddBeerActivity extends Activity {
 	}
 
 	public void enregistrer(View vue) {
+		
+		if(nom.getText().toString().trim().equals("")){
+			Toast.makeText(getApplicationContext(), "Il vous faut indiquer un nom  à la bière", Toast.LENGTH_SHORT).show();
+			return;
+		}		
+		if(type.getText().toString().trim().equals("")){
+			Toast.makeText(getApplicationContext(), "Il vous faut indiquer une adresse à la bière", Toast.LENGTH_SHORT).show();
+			return;
+		}
+		if(prix.getText().toString().trim().equals("")){
+			Toast.makeText(getApplicationContext(), "Il vous faut indiquer un prix à la bière", Toast.LENGTH_SHORT).show();
+			return;
+		}		
+		if(pourcentALcool.getText().toString().trim().equals("")){
+			Toast.makeText(getApplicationContext(), "Il vous faut indiquer une % d'alcoolimie à la bière", Toast.LENGTH_SHORT).show();
+			return;
+		}
+		if(fiche.getText().toString().trim().equals("")){
+			Toast.makeText(getApplicationContext(), "Il vous faut indiquer une fiche à la bière", Toast.LENGTH_SHORT).show();
+			return;
+		}
+		
 		beer.setName(nom.getText().toString());
 		beer.setType(type.getText().toString());
 		beer.setPrix(prix.getText().toString());
 		beer.setFiche(fiche.getText().toString());
 		beer.setPourcentAlcool(pourcentALcool.getText().toString());
-		BeerController.addBeer(DAO, beer, idBar, DAO_Bar);
+		BeerController.addBeer(DAO, beer, idBar, DAO_Bar, this);
 		finish();
 	}
 
